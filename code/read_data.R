@@ -13,3 +13,4 @@ widened.data <- data |>
   pivot_wider(names_from = actor, values_from = actor1)
 
 saveRDS(widened.data, file = "data/intermediate/wide_data.RDS")
+
