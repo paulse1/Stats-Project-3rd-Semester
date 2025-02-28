@@ -7,9 +7,12 @@ data <- read_csv("data/raw/1997-01-01-2025-01-01-Nigeria.csv")
 ## before that one has to create a column to take names from though
 
 widened.data <- data |>
+  mutate(civilian_targeting = !is.na(civilian_targeting)) |>
   group_by(event_id_cnty) |>
   mutate(actor = paste0("actor", seq_len(length(event_id_cnty)))) |>
   ungroup() |> 
   pivot_wider(names_from = actor, values_from = actor1)
 
 saveRDS(widened.data, file = "data/intermediate/wide_data.RDS")
+
+
