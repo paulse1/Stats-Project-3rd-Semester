@@ -14,3 +14,18 @@ widened.data <- data |>
   pivot_wider(names_from = actor, values_from = actor1)
 
 saveRDS(widened.data, file = "data/intermediate/wide_data.RDS")
+
+## Categorization of Militant Groups
+
+data |>
+  mutate(group_association = case_when(str_detect(actor1, "Police") ~ "Police",
+                                       str_detect(actor1, "Militia") ~ "Militia",
+                                       str_detect(actor1, "Civilians") ~ "Civilians",
+                                       str_detect(actor1, "(Islamic State|Boko Haram)") ~ "Islamist Terror",
+                                       str_detect(actor1, "Military Forces of Nigeria") ~ "Nigerian Military",
+                                       str_detect(actor1, "Rioters") ~ "Rioters",
+                                       str_detect(actor1, "Unidentified Armed Group") ~ "Unidentified Armed Group"
+                                       )
+               ) |> 
+  mutate(group_association = case_when(is.na(group_association) ~ "other"))
+
