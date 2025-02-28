@@ -55,3 +55,5 @@ categorized_data |>
 ##For this Analysis couting rioters as a unique group is senseless bacause they
 ##only commit Riots, would they have attacked someone they would be militants or
 ##Unidentified
+
+
