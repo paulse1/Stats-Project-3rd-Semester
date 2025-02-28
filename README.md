@@ -1,44 +1,29 @@
 # Stats-Project-3rd-Semester
-##Brainstorming
 
-Is there an association between type of conflict and conflict groups?
-Total numbers ? (e.g. looting for Civilians)
-Group actors (into Police force, Military, … ) -> grepl
-Violence against Civilians ?
+## Project Overview
+This project analyzes conflict data in Nigeria, examining the relationship between conflict types and conflict groups while tracking trends over time. The study also visualizes conflicts using heat maps and statistical methods to gain deeper insights.
 
-Is there a change in the type of conflict observable over time?
+## Research Questions
+This project aims to address the following key questions:
 
-Heat Map of Nigerian Conflicts ? (package: Maps)
-facet wrap of Maps (if possible)
+1. **Is there an association between conflict type and conflict groups?**  
 
-change civilian targeting variable to boolean
+2. **Has the nature of conflicts changed over time?**  
 
-Data Analysis first and then Read History on Wikipedia
+3. **What is the geographical distribution of conflicts in Nigeria?**  
 
+4. **Violence against civilians**  
 
-##file structure
-project/
-├── data/                     # Directory for storing data files
-│   ├── raw/                  # Raw data files (immutable)
-│   │   └── 1997-01-01-2025-01-01-Nigeria.csv 
-│   └── processed/            # Processed data files (cleaned and transformed)
-│       ├── .RDS              
-│       └── .RDS              
-├── code/                     # Directory for utility scripts and helper functions
-│   ├── .R                    
-│   └── .R                    
-├── R/                        # Directory for main R scripts
-│   ├── 01_data_import.R      
-│   ├── 02_data_cleaning.R    
-│   ├── 03_analysis.R         
-│   └── 04_visualization.R    
-├── output/                   # Directory for storing output files
-│   └── figures/              # Generated visualizations (e.g., plots, charts)
-│   │   └── .png              
-│   └── reports/              # Generated reports (e.g., HTML, PDF)
-│   └── tables/               # Generated tables (e.g., CSV files)
-├── setting.R                 # all used library
-└── source_all.R              # Master script to run all R scripts in sequence
+## File Structure
+
+- **`data/raw/`** → Stores the original dataset (immutable).  
+- **`data/intermediate/`** → Stores cleaned and processed datasets.  
+- **`code/`** → Contains helper functions for data processing.  
+- **`R/`** → Contains main scripts for importing, cleaning, analyzing, and visualizing data.  
+- **`output/`** → Stores all generated outputs, including figures, reports, and tables.  
+- **`setting.R`** → Loads necessary libraries before running analysis.  
+- **`source_all.R`** → Runs all scripts sequentially.  
+
 
 
 
