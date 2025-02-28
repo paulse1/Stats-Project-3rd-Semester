@@ -7,7 +7,12 @@ data <- read_csv("data/raw/1997-01-01-2025-01-01-Nigeria.csv")
 ## before that one has to create a column to take names from though
 
 clean.data <- data |>
-  mutate(across(everything(), ~ gsub('["\']', "", .)))
+  mutate(across(everything(), ~ gsub('["\']', "", .))) |>
+  group_by(event_id_cnty) |>
+  mutate(fatalities = ifelse(is.na(fatalities), first(na.omit(fatalities)), fatalities)) |>
+  mutate(timestamp = ifelse(is.na(timestamp), first(na.omit(timestamp)), timestamp)) |>
+  mutate(notes = notes[which.max(nchar(notes))])
+  
 
 widened.data <- clean.data |>
   mutate(civilian_targeting = ifelse(replace_na(civilian_targeting, "") == "Civilian targeting", TRUE, FALSE)) |>
