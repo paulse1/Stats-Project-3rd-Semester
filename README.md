@@ -1,5 +1,5 @@
 # Stats-Project-3rd-Semester
-##Brainstorming
+## Brainstorming
 
 Is there an association between type of conflict and conflict groups?
 Total numbers ? (e.g. looting for Civilians)
@@ -16,12 +16,12 @@ change civilian targeting variable to boolean
 Data Analysis first and then Read History on Wikipedia
 
 
-##file structure
+## file structure
 project/
 ├── data/                     # Directory for storing data files
 │   ├── raw/                  # Raw data files (immutable)
 │   │   └── 1997-01-01-2025-01-01-Nigeria.csv 
-│   └── processed/            # Processed data files (cleaned and transformed)
+│   └── intermediate/         # Processed data files (cleaned and transformed)
 │       ├── .RDS              
 │       └── .RDS              
 ├── code/                     # Directory for utility scripts and helper functions
