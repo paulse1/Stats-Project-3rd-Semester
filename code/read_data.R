@@ -6,7 +6,10 @@ data <- read_csv("data/raw/1997-01-01-2025-01-01-Nigeria.csv")
 ## to make data "tidy" each observation needs to be one row, so the data needs to be pivoted wider
 ## before that one has to create a column to take names from though
 
-widened.data <- data |>
+clean.data <- data |>
+  mutate(across(everything(), ~ gsub('["\']', "", .)))
+
+widened.data <- clean.data |>
   mutate(civilian_targeting = ifelse(replace_na(civilian_targeting, "") == "Civilian targeting", TRUE, FALSE)) |>
   group_by(event_id_cnty) |>
   mutate(actor = paste0("actor", seq_len(length(event_id_cnty)))) |>
