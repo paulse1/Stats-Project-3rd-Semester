@@ -21,4 +21,5 @@ ggplot() +
              aes(x = long, y = lat, group = group_association),
              color = "red",
              size = 0.3) +
-  facet_wrap(vars(group_association))
+  facet_wrap(vars(group_association)) +
+  theme_bw()
