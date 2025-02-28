@@ -17,7 +17,7 @@ saveRDS(widened.data, file = "data/intermediate/wide_data.RDS")
 
 ## Categorization of Militant Groups
 
-data |>
+categorized_data <- data |>
   mutate(group_association = case_when(str_detect(actor1, "Police") ~ "Police",
                                        str_detect(actor1, "Militia") ~ "Militia",
                                        str_detect(actor1, "Civilians") ~ "Civilians",
@@ -27,5 +27,6 @@ data |>
                                        str_detect(actor1, "Unidentified Armed Group") ~ "Unidentified Armed Group"
                                        )
                ) |> 
-  mutate(group_association = case_when(is.na(group_association) ~ "other"))
+  mutate(group_association = ifelse(is.na(group_association), "Other", group_association)) |> 
+  rename(long = longitude, lat = latitude)
 
