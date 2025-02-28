@@ -12,9 +12,11 @@ clean.data <- data |>
   mutate(population_best = str_extract(population_best, "[0-9]+,*",)) |>
   mutate(across(everything(), ~ gsub(',{2,}', "", .))) |>
   group_by(event_id_cnty) |>
-  mutate(fatalities = ifelse(is.na(fatalities), first(na.omit(fatalities)), fatalities)) |>
-  mutate(timestamp = ifelse(is.na(timestamp), first(na.omit(timestamp)), timestamp)) |>
-  mutate(notes = notes[which.max(nchar(notes))]) 
+  mutate(fatalities = ifelse(is.na(fatalities), first(as.numeric(na.omit(fatalities))), as.numeric(fatalities))) |>
+  mutate(timestamp = ifelse(is.na(timestamp), first(as.numeric(na.omit(timestamp))), as.numeric(timestamp))) |>
+  mutate(notes = notes[which.max(nchar(notes))]) |>
+  ungroup()
+  
   
 widened.data <- clean.data |>
   mutate(civilian_targeting = ifelse(replace_na(civilian_targeting, "") == "Civilian targeting", TRUE, FALSE)) |>
