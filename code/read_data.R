@@ -1,6 +1,6 @@
 ## Read CSV
 
-data<- read_csv("data/raw/1997-01-01-2025-01-01-Nigeria.csv")
+data <- read_csv("data/raw/1997-01-01-2025-01-01-Nigeria.csv")
 data1<- read_csv("data/raw/1997-01-01-2025-01-01-Nigeria.csv")
 
 ## Each conflict is identified by an ID (event_id_cnty)
@@ -15,6 +15,9 @@ clean.data <- data |>
   mutate(fatalities = ifelse(is.na(fatalities), first(as.numeric(na.omit(fatalities))), as.numeric(fatalities))) |>
   mutate(timestamp = ifelse(is.na(timestamp), first(as.numeric(na.omit(timestamp))), as.numeric(timestamp))) |>
   mutate(notes = notes[which.max(nchar(notes))]) |>
+  ungroup() |>
+  group_by(year, location) |>
+  mutate(population_best = first(na.omit(population_best))) |>
   ungroup()
   
   
@@ -27,6 +30,7 @@ widened.data <- clean.data |>
 
 saveRDS(widened.data, file = "data/intermediate/wide_data.RDS")
 
-duplicates <- widened.data |>
-             group_by(event_id_cnty) |>
-             filter(n() > 1)
+#for tests
+#duplicates <- widened.data |>
+             #group_by(event_id_cnty) |>
+             #filter(n() > 1)
