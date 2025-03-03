@@ -21,8 +21,8 @@ ggplot() +
 
 
 month_day = month(processed_data$event_date)
-print(month_day)
-ggplot(processed_data, aes(longitude,latitude,colour = event_type)) +
+
+pmonth<-ggplot(processed_data, aes(longitude,latitude,colour = event_type)) +
   geom_polygon(data = nigeria_map, aes(x = long, y = lat, group = group),
                fill = "gray90", color = "black") +
   geom_point(alpha = 0.7, show.legend = FALSE) +
@@ -32,5 +32,22 @@ ggplot(processed_data, aes(longitude,latitude,colour = event_type)) +
   facet_wrap(~event_type) +
   # Here comes the gganimate specific bits
   labs(title = "Armed Conflict Events in Nigeria month: {frame_time}", x = "Longitude", y = "Latitude", color = "Event Type")+
+  transition_time(as.integer(month_day)) +
+  ease_aes('linear')
+animate(pmonth,duration = 40)
+anim_save("output/figures/event_type_month.gif",pmonth)
+
+pyear<-ggplot(processed_data, aes(longitude,latitude,colour = event_type)) +
+  geom_polygon(data = nigeria_map, aes(x = long, y = lat, group = group),
+               fill = "gray90", color = "black") +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  
+  # scale_size(range = c(2, 12)) +
+  # scale_x_log10() +
+  facet_wrap(~event_type) +
+  # Here comes the gganimate specific bits
+  labs(title = "Armed Conflict Events in Nigeria year: {frame_time}", x = "Longitude", y = "Latitude", color = "Event Type")+
   transition_time(as.integer(year)) +
   ease_aes('linear')
+animate(pyear,duration = 40)
+anim_save("output/figures/event_type_year.gif", pyear)
