@@ -1,11 +1,31 @@
+## Read CSV
+# library("tidyverse")
+library("lubridate")
+library("checkmate")
+raw_data <- read_csv("data/raw/1997-01-01-2025-01-01-Nigeria.csv")
+# data <- data %>%
+#   mutate(time = timestamp(timestamp))
 
-data <- readRDS("data/intermediate/raw_data.RDS")
+data <- raw_data %>%
+  mutate(
+    civilian_targeting = gsub('"','',civilian_targeting)
+    civilian_targeting = !is.na(civilian_targeting), 
+    timestamp = as.POSIXct(timestamp, origin = "1970-01-01", tz = "Africa/Lagos"),
+    event_date = parse_date_time(event_date, orders = c("d B Y", "m/d/Y")), 
+    time_diff = round(timestamp - event_date, 0), 
+    time_precision = as.factor(time_precision),
+    geo_precision = as.factor(geo_precision),  
+    actor1 = gsub('"', '', actor1),
+    population_best = gsub(',','',population_best),
+    population_best = na_if(population_best, "NA"),
+    sub_event_type = gsub('"','',sub_event_type),
+    source_scale = gsub('"', '', source_scale)
+  )%>%
+  drop_na(timestamp)%>%
+
+  rename(publisch_time = timestamp)
 
 
-widened.data <- data |>
-  group_by(event_id_cnty) |>
-  mutate(actor = paste0("actor", seq_len(length(event_id_cnty)))) |>
-  ungroup() |> 
-  pivot_wider(names_from = actor, values_from = actor1)
+saveRDS(data, "data/intermediate/processed_data.RDS")
+write.csv(data, "data/intermediate/processed_data.csv", row.names = FALSE)
 
-saveRDS(widened.data, file = "data/intermediate/wide_data.RDS")

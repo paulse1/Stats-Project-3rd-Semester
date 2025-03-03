@@ -2,7 +2,8 @@ library(tidyverse)
 library(lubridate)
 library(maps)
 library(ggplot2)
-
+library(gganimate)
+library(gifski)
 # Data Acquisition
 data <- read_csv("data/raw/1997-01-01-2025-01-01-Nigeria.csv")
 
@@ -111,3 +112,16 @@ ggplot(civilians_data, aes(x = group_category)) +
   geom_bar(fill = "darkgreen") +
   theme_minimal() +
   labs(title = "Violence Against Civilians by Group Category", x = "Group Category", y = "Count")
+
+animated_trends <- ggplot(temporal_data, aes(x = year, y = count, color = event_type)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  theme_minimal() +
+  labs(title = "Temporal Trends of Event Types (Year: {frame_time})",
+       x = "Year", y = "Count", color = "Event Type") +
+  transition_time(year) +  # 逐年变化
+  ease_aes('linear')  # 线性过渡
+
+# 渲染动画并保存
+animate(animated_trends, renderer = gifski_renderer("output/figures/event_trends.gif"))
+
