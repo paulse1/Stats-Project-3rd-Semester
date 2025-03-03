@@ -12,6 +12,7 @@ data <- raw_data %>%
   mutate(
     civilian_targeting = replace_na(str_detect(civilian_targeting, "Civilian targeting"), FALSE),
     region = gsub('"','',region),
+    location = gsub('["\']', '', location),
     timestamp = as.POSIXct(timestamp, origin = "1970-01-01", tz = "Africa/Lagos"),
     event_date = parse_date_time(event_date, orders = c("d B Y", "m/d/Y")), 
     time_diff = round(timestamp - event_date, 0), 
@@ -25,7 +26,7 @@ data <- raw_data %>%
   )%>%
   drop_na(timestamp)%>%
 
-  rename(publisch_time = timestamp)%|%
+  rename(publish_time = timestamp)%>%
   distinct()
 
 
