@@ -24,8 +24,7 @@ data <- raw_data %>%
     source_scale = gsub('"', '', source_scale)
   )%>%
   drop_na(timestamp)%>%
-
-  rename(publisch_time = timestamp)%|%
+  rename(publisch_time = timestamp)%>%
   distinct()
 
 
