@@ -219,4 +219,4 @@ The concept should be give advice to the government about:
 
 ### Plots
 
--   ![Example Plot](/outputs/figures//event_type_month.gif)
+-   ![Example Plot](outputs/figures/event_type_month.gif)
