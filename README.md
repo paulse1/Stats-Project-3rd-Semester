@@ -2,13 +2,13 @@
 
 ## Some Example Plots
 
-![alt text](https://github.com/paulse1/Stats-Project-3rd-Semester/tree/more-plots/output/figures/cumulative_deaths.png)
+![alt text](output/figures/cumulative_deaths.png)
 
-![alt text](https://github.com/paulse1/Stats-Project-3rd-Semester/tree/more-plots/output/figures/event_type_pie_chart.png)
+![alt text](output/figures/event_type_pie_chart.png)
 
-![alt text](https://github.com/paulse1/Stats-Project-3rd-Semester/tree/more-plots/output/figures/event_counter_plot.png)
+![alt text](output/figures/event_counter_plot.png)
 
-![alt text](https://github.com/paulse1/Stats-Project-3rd-Semester/tree/more-plots/output/figures/daily_casualties.png)
+![alt text](output/figures/daily_casualties.png)
 
 ## Project Overview
 
