@@ -1,6 +1,7 @@
 library(gapminder)
 library(maps)
 library(gifski)
+library(gganimate)
 
 processed_data <- readRDS("data/intermediate/processed_data.RDS")
 
@@ -18,21 +19,36 @@ ggplot() +
   labs(title = "Armed Conflict Events in Nigeria", x = "Longitude", y = "Latitude", color = "Event Type")+
   transition_time(year) +
   ease_aes('linear')
-  
+
 
 month_day = month(processed_data$event_date)
 print(month_day)
-ggplot(processed_data, aes(longitude,latitude,colour = event_type)) +
+animated_civilian_violence_month <- ggplot(processed_data, aes(longitude,latitude,colour = event_type)) +
   geom_polygon(data = nigeria_map, aes(x = long, y = lat, group = group),
                fill = "gray90", color = "black") +
   geom_point(alpha = 0.7, show.legend = FALSE) +
- 
+  
   # scale_size(range = c(2, 12)) +
   # scale_x_log10() +
   facet_wrap(~event_type) +
   # Here comes the gganimate specific bits
   labs(title = "Armed Conflict Events in Nigeria month: {frame_time}", x = "Longitude", y = "Latitude", color = "Event Type")+
+  transition_time(month) +
+  ease_aes('linear')
+
+anim_save("output/figures/animated_civilian_violence_month.gif", animated_civilian_violence_month)
+
+animated_civilian_violence_year <- ggplot(processed_data, aes(longitude,latitude,colour = event_type)) +
+  geom_polygon(data = nigeria_map, aes(x = long, y = lat, group = group),
+               fill = "gray90", color = "black") +
+  geom_point(alpha = 0.7, show.legend = FALSE) +
+  
+  # scale_size(range = c(2, 12)) +
+  # scale_x_log10() +
+  facet_wrap(~event_type) +
+  # Here comes the gganimate specific bits
+  labs(title = "Armed Conflict Events in Nigeria year: {frame_time}", x = "Longitude", y = "Latitude", color = "Event Type")+
   transition_time(year) +
   ease_aes('linear')
 
-animate(animated_civilian_violence, renderer = gifski_renderer("output/figures/civilian_violence.gif"))
+anim_save("output/figures/animated_civilian_violence_year.gif", animated_civilian_violence_year)
