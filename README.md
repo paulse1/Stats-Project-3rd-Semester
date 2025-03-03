@@ -118,19 +118,19 @@ This part is a general overview of the data behavior. The aim is through ituitiv
 
 #### Possible Visualizations:
 
--   **Conflict Type Distribution:** 
+-   **Conflict Type Distribution:**
     -   Calculate the proportion of each event type (e.g., “Violence against civilians” might account for 35%).
--   **Major Conflict Groups:** 
+-   **Major Conflict Groups:**
     -   List the top 10 most active groups (e.g., “Boko Haram,” “Fulani Ethnic Militia”).
--   **Casualty Analysis:** 
+-   **Casualty Analysis:**
     -   Compute average casualty figures and identify event types with high fatality counts (e.g., “Explosions/Remote Violence”).
--   **Time Trend Chart:** 
+-   **Time Trend Chart:**
     -   Count conflict events by year or month to observe overall trends (e.g., a surge in conflicts post-2009).
--   **Conflict Type Distribution:** 
+-   **Conflict Type Distribution:**
     -   Use a pie chart to display the proportion of each event type, and a stacked bar chart to show group-specific preferences.
--   **Geographical Heat Map:** 
+-   **Geographical Heat Map:**
     -   Plot conflicts using latitude and longitude to highlight high-risk areas (e.g., northeastern Borno State).
--   **Group-Event Association Matrix:** 
+-   **Group-Event Association Matrix:**
     -   Create a heat map to show the concentration of event types by different groups.
 
 ------------------------------------------------------------------------
@@ -156,7 +156,7 @@ Assumed that we already have our hypothesis from EDA, we need to do advanced ana
 
 ------------------------------------------------------------------------
 
-### IV. In-Depth Analysis and Interpretation  
+### IV. In-Depth Analysis and Interpretation
 
 Here we answer the questions about hypothesis.
 
@@ -177,15 +177,18 @@ Here we answer the questions about hypothesis.
 
 ### V. Statistical Modeling and Hypothesis Testing
 
-The concept should be give advice to the government about:  
+The concept should be give advice to the government about:
+
 -   **Security** I.e. in Aug, more defense in northern area against group Boko and type Battles
 -   **Society** i.e. avoid resource disputes among civilians in certain seasons
 
 #### Regression and Causal Analysis
+
 -   **Build regression models** (e.g., multiple regression or logistic regression) to explore whether conflict types can be explained by group attributes or time factors.
 -   **Conduct hypothesis tests** to verify whether the relationship between conflict types and group as well as time variables is statistically significant.
 
 #### Model Diagnostics and Optimization
+
 -   Evaluate the model's fit by diagnosing residual distributions, multicollinearity issues, etc.
 -   Improve and optimize the model based on the diagnostic results to ensure that the interpretations are reasonable.
 
@@ -214,3 +217,6 @@ The concept should be give advice to the government about:
 -   **Actor Motivations:** Political power struggles, religious ideologies, and economic interests.
 -   **Spatiotemporal Dynamics:** Seasonality of conflicts, geographical diffusion patterns, and the effects of policy interventions.
 
+## Plots
+
+![Example Plot](output/figures/event_type_month.gif) ![Example Plot](output/figures/event_type_year.gif)
