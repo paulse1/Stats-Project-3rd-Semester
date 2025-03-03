@@ -1,5 +1,15 @@
 # Stats-Project-3rd-Semester
 
+## Some Example Plots
+
+![alt text](https://github.com/paulse1/Stats-Project-3rd-Semester/tree/more-plots/output/figures/cumulative_deaths.png)
+
+![alt text](https://github.com/paulse1/Stats-Project-3rd-Semester/tree/more-plots/output/figures/event_type_pie_chart.png)
+
+![alt text](https://github.com/paulse1/Stats-Project-3rd-Semester/tree/more-plots/output/figures/event_counter_plot.png)
+
+![alt text](https://github.com/paulse1/Stats-Project-3rd-Semester/tree/more-plots/output/figures/daily_casualties.png)
+
 ## Project Overview
 
 This project analyzes conflict data in Nigeria, examining the relationship between conflict types and conflict groups while tracking trends over time. The study also visualizes conflicts using heat maps and statistical methods to gain deeper insights.
