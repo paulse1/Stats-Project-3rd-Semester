@@ -216,7 +216,3 @@ The concept should be give advice to the government about:
 -   **Structural Factors:** Economic inequality, resource distribution, and ethnic conflicts.
 -   **Actor Motivations:** Political power struggles, religious ideologies, and economic interests.
 -   **Spatiotemporal Dynamics:** Seasonality of conflicts, geographical diffusion patterns, and the effects of policy interventions.
-
-## Plots
-
-![Example Plot](output/figures/event_type_month.gif) ![Example Plot](output/figures/event_type_year.gif)
