@@ -6,10 +6,12 @@ raw_data <- read_csv("data/raw/1997-01-01-2025-01-01-Nigeria.csv")
 # data <- data %>%
 #   mutate(time = timestamp(timestamp))
 
+
+
 data <- raw_data %>%
   mutate(
-    civilian_targeting = gsub('"','',civilian_targeting)
-    civilian_targeting = !is.na(civilian_targeting), 
+    civilian_targeting = replace_na(str_detect(civilian_targeting, "Civilian targeting"), FALSE),
+    region = gsub('"','',region),
     timestamp = as.POSIXct(timestamp, origin = "1970-01-01", tz = "Africa/Lagos"),
     event_date = parse_date_time(event_date, orders = c("d B Y", "m/d/Y")), 
     time_diff = round(timestamp - event_date, 0), 
@@ -23,7 +25,8 @@ data <- raw_data %>%
   )%>%
   drop_na(timestamp)%>%
 
-  rename(publisch_time = timestamp)
+  rename(publisch_time = timestamp)%|%
+  distinct()
 
 
 saveRDS(data, "data/intermediate/processed_data.RDS")
