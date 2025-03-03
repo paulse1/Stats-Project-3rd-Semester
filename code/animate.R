@@ -34,5 +34,3 @@ ggplot(processed_data, aes(longitude,latitude,colour = event_type)) +
   labs(title = "Armed Conflict Events in Nigeria month: {frame_time}", x = "Longitude", y = "Latitude", color = "Event Type")+
   transition_time(year) +
   ease_aes('linear')
-
-animate(animated_civilian_violence, renderer = gifski_renderer("output/figures/civilian_violence.gif"))
