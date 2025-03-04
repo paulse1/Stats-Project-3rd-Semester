@@ -1,5 +1,5 @@
 ## Read CSV
-# library("tidyverse")
+library("tidyverse")
 library("lubridate")
 library("checkmate")
 raw_data <- read_csv("data/raw/1997-01-01-2025-01-01-Nigeria.csv")
