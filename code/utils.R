@@ -1,4 +1,4 @@
-
+library("tidyverse")
 get_actor_region <- function(data) {
   data <- data |>
     mutate(
@@ -64,7 +64,7 @@ get_actor_cate <- function(data) {
         
         
         # Otherwise, NA
-        TRUE ~ actor1
+        TRUE ~ NA_character_
       ),
       actor_category = gsub(":.*","",actor_category)
     )
@@ -72,13 +72,13 @@ get_actor_cate <- function(data) {
   return(data)
 }
 
-
+# 
 # str_detect(actor1, regex("Islamic State West Africa Province|Boko Haram", ignore_case = TRUE)) ~ "ISWAP and/or Boko Haram",
 # 
 # str_detect(actor1, regex("Islamic State West Africa Province", ignore_case = TRUE)) ~ "ISWAP",
 # 
 # str_detect(actor1, regex("Unidentified Armed Group", ignore_case = TRUE)) ~ "Unidentified",
-
+# 
 
 
 

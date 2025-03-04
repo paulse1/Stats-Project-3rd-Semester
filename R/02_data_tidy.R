@@ -27,8 +27,23 @@ data <- raw_data %>%
   drop_na(timestamp)%>%
 
   rename(publish_time = timestamp)%>%
-  distinct()
-
+  distinct()%>%
+  mutate(
+    actor1 = gsub("\\(.*?\\)", "", actor1),
+    
+    actor1 = case_when(
+      # State forces: include "Military Forces" / "Police Forces"
+      str_detect(actor1, regex("slamic State West Africa Province (ISWAP) and/or Boko Haram", ignore_case = TRUE)) ~ "ISWAP and/or Boko Haram",
+      
+      str_detect(actor1, regex("Boko Haram", ignore_case = TRUE)) ~ "Boko Haram",
+      
+      
+      str_detect(actor1, regex("Islamic State West Africa Province", ignore_case = TRUE)) ~ "ISWAP",
+      
+      # Otherwise, NA
+      TRUE ~ actor1
+    ))
+  
 
 saveRDS(data, "data/intermediate/processed_data.RDS")
 write.csv(data, "data/intermediate/processed_data.csv", row.names = FALSE)
