@@ -7,7 +7,7 @@
 # 1_1 event type - sub event type
 # ---------------------------------
 
-# use wide data to make event unique
+### use wide data to make event unique
 
 
 
@@ -28,7 +28,7 @@
 # 1_2 about actor
 # ---------------------------------
 
-# use long data to fully count actors
+### use long data to fully count actors
 
 # detect most active actors: top 10 / top 20
 # bar charts
@@ -46,9 +46,9 @@
 
 
 
-# as 439 different actors are beyond understandable
-# categorize actors in 7 groups acc. inter. code (doc from ACLED)
-# incomplete, need to be validated
+### as 439 different actors are beyond understandable
+### categorize actors in 7 groups acc. inter. code (doc from ACLED)
+### incomplete, need to be validated
 
 
 
@@ -71,8 +71,8 @@
 # 2_1 series analysis of event type
 # ---------------------------------
 
-# use wide data to make event unique
-# ???: the value of 2025 be filtered out as incomplete statistics
+### use wide data to make event unique
+### ???: the value of 2025 be filtered out as incomplete statistics
 
 
 
@@ -108,6 +108,38 @@
 # ---------------------------------
 # 2_2 series analysis of actor
 # ---------------------------------
+
+### use long data to fully count actors
+### use the categorized actor data
+
+
+
+
+# to explore the trend of number of events caused by top 10
+# line chart: year - count of event, grouped by actor
+# colored by different actor
+
+
+
+
+# to explore the seasonal periodicity of number of events caused by top 10
+# line chart: month - count of event, grouped by actor
+# colored by different actor
+
+
+
+
+# to explore the trend of number of events caused by actor category
+# line chart: year - count of event, grouped by actor category
+# colored by different actor category
+
+
+
+
+# to explore the seasonal periodicity of number of events caused by actor category
+# line chart: month - count of event, grouped by actor category
+# colored by different actor category
+
 
 
 
