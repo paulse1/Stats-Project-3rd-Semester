@@ -196,6 +196,7 @@ ggplot(data, aes(x = longitude, y = latitude)) +
   theme_minimal()
 
 # Alternatively, for a more advanced map using ggmap (requires API key for Google Maps):
+# check geological features relation 
 # register_google(key = "YOUR_API_KEY")
 # map_base <- get_map(location = c(lon = mean(data$longitude), lat = mean(data$latitude)),
 #                     zoom = 6, maptype = "terrain")
