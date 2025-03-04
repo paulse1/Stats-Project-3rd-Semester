@@ -219,6 +219,77 @@
 
 
 
+# =================================
+# 4 Association Analysis 
+# =================================
+
+# ---------------------------------
+# 4_1 Casualty Analysis
+# ---------------------------------
+
+### use wide data to make event unique
+
+
+
+# study on average / median / sum of fatalities per event type
+# ??? which key value is the best
+# bar chart
+
+
+
+
+
+# alternatively study on event type and sub event type
+# therefore stacked bar chart
+
+
+
+
+# more alternatively: study on population influenced?
+
+
+
+
+
+# ---------------------------------
+# 4_2 Event types vs actor categories
+# ---------------------------------
+
+# Chi-Square Test
+
+
+# Cramer’s V Coefficient
+
+
+
+
+
+
+# ---------------------------------
+# 4_3 Time vs Geography
+# ---------------------------------
+
+
+
+
+# =================================
+# 5 Advanced Analysis 
+# =================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
