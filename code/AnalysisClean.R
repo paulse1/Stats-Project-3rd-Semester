@@ -154,8 +154,10 @@
 
 
 
+
+
 # ---------------------------------
-# 3_1 Distribution of event type
+# 3_1 Overview of distribution
 # ---------------------------------
 
 ### use wide data to make event unique
@@ -175,6 +177,14 @@
 
 
 
+# ---------------------------------
+# 3_2 Distribution of event type
+# ---------------------------------
+
+### use wide data to make event unique
+
+
+
 
 # to explore the distribution of each type of event
 # faceted map plot charts: with each event type a subplot, grouped by event type
@@ -185,7 +195,7 @@
 
 
 # ---------------------------------
-# 3_2 Distribution of actors
+# 3_3 Distribution of actors
 # ---------------------------------
 
 ### use long data to fully count actors
