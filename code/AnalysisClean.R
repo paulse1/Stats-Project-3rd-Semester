@@ -144,6 +144,61 @@
 
 
 
+# =================================
+# 3 Geographical distributions 
+# =================================
+
+### get map data for Nigeria
+### ??? think of getting terrain data, such as contour lines
+### one way could be using Google map by ggmap(), but API key required
+
+
+
+# ---------------------------------
+# 3_1 Distribution of event type
+# ---------------------------------
+
+### use wide data to make event unique
+
+
+
+
+# to explore the distribution of total number of events
+# map plot with all event points with transparency (alpha = 0.1)
+
+
+
+
+
+# to explore the distribution of each type of event
+# faceted map plot charts: with each event type a subplot, grouped by event type
+# colored by different event types
+
+
+
+
+
+# ---------------------------------
+# 3_2 Distribution of actors
+# ---------------------------------
+
+### use long data to fully count actors
+### use the categorized actor data
+
+
+
+# to explore the distribution of each top 10 actor
+# faceted map plot charts: with each event type a subplot, grouped by actor
+# colored by different actors
+
+
+
+
+# to explore the distribution of each actor category
+# faceted map plot charts: with each event type a subplot, grouped by actor category
+# colored by different actor categories
+
+
 
 
 
