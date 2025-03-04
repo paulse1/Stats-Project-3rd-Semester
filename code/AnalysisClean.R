@@ -170,6 +170,12 @@
 
 
 
+# alternatively making a geological heat map (bins)
+
+
+
+
+
 # to explore the distribution of each type of event
 # faceted map plot charts: with each event type a subplot, grouped by event type
 # colored by different event types
@@ -197,7 +203,6 @@
 # to explore the distribution of each actor category
 # faceted map plot charts: with each event type a subplot, grouped by actor category
 # colored by different actor categories
-
 
 
 
