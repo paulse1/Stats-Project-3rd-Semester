@@ -63,6 +63,55 @@
 
 
 
+# =================================
+# 2 Time Series Analysis
+# =================================
+
+# ---------------------------------
+# 2_1 series analysis of event type
+# ---------------------------------
+
+# use wide data to make event unique
+# ???: the value of 2025 be filtered out as incomplete statistics
+
+
+
+
+
+# to explore the trend of total number of events
+# line chart: year - count of event type (sum)
+
+
+
+
+# to explore the trend of each type of event
+# line chart: year - count of each event type, grouped by event type
+# colored by different event types
+
+
+
+
+# to explore the seasonal periodicity of total number of events 
+# line chart: month - count of event type (sum)
+
+
+
+
+# to explore the seasonal periodicity of each type of event
+# line chart: month - count of each event type, grouped by event type
+# colored by different event types
+
+
+
+
+
+# ---------------------------------
+# 2_2 series analysis of actor
+# ---------------------------------
+
+
+
+
 
 
 
