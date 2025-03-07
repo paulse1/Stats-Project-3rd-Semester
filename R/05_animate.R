@@ -5,6 +5,7 @@ library(ggplot2)
 library(gganimate)
 library(magick)
 
+
 # =================================
 # 0 data prepare
 # =================================
@@ -21,7 +22,7 @@ cata_act_data <- get_actor_cate(processed_data)
 nigeria_map <- map_data("world", region = "Nigeria")
 
 # 
-# # conflict events on the Nigeria map
+# conflict events on the Nigeria map
 # ggplot() +
 #   geom_polygon(data = nigeria_map, aes(x = long, y = lat, group = group),
 #                fill = "gray90", color = "black") +
@@ -32,7 +33,7 @@ nigeria_map <- map_data("world", region = "Nigeria")
 #   labs(title = "Armed Conflict Events in Nigeria", x = "Longitude", y = "Latitude", color = "Event Type")+
 #   transition_time(year) +
 #   ease_aes('linear')
-# 
+
 # 
 # month_day = month(processed_data$event_date)
 # 
@@ -74,6 +75,12 @@ top10_groups <- cata_act_data %>%
   arrange(desc(count)) %>%
   top_n(10, count)
 
+library(RColorBrewer)
+
+# Combine Set1 and Set2 for more colors
+combined_colors <- c(brewer.pal(9, "Set1"), brewer.pal(8, "Set2"))
+
+# Apply it to your ggplot
 
 top_10_act <- cata_act_data %>%
   filter(actor1 %in% top10_groups$actor1)
@@ -89,7 +96,8 @@ armed_conf_evt_act_year <- ggplot(top_10_act, aes(longitude, latitude, color = a
   geom_point(alpha = 0.5, size = 2) + 
   facet_wrap(~event_type) +
   theme_minimal() +
-  scale_color_brewer(palette = "Set1") + 
+  scale_color_manual(values = combined_colors)+
+  # scale_color_brewer(palette = "Set3") +
   theme(
     legend.background = element_rect(fill = "white", color = NA), 
     legend.key = element_rect(fill = "white", color = NA)
@@ -120,7 +128,7 @@ armed_conf_evt_act_year_plot <- ggplot(top_10_act, aes(longitude, latitude, colo
   geom_point(alpha = 0.5, size = 2) + 
   facet_wrap(~event_type) +
   theme_minimal() +
-  scale_color_brewer(palette = "Set1") + 
+  scale_color_manual(values = combined_colors)+
   theme(
     legend.background = element_rect(fill = "white", color = NA), 
     legend.key = element_rect(fill = "white", color = NA)
@@ -143,7 +151,7 @@ armed_conf_cumulative <- ggplot(top_10_act, aes(longitude, latitude, color = act
   geom_point(alpha = 0.2, size = 2) +
   facet_wrap(~event_type) +
   theme_minimal() +
-  scale_color_brewer(palette = "Set1") +
+  scale_color_manual(values = combined_colors)+
   theme(
     legend.background = element_rect(fill = "white", color = NA),
     legend.key = element_rect(fill = "white", color = NA)
