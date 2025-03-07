@@ -15,7 +15,6 @@ get_actor_region <- function(data) {
 
 widened_actor1 <- function(data) {
   data <- data |>
-    mutate(civilian_targeting = !is.na(civilian_targeting)) |>
     group_by(event_id_cnty) |>
     mutate(actor = paste0("actor", seq_len(length(event_id_cnty)))) |>
     ungroup() |>
@@ -61,10 +60,12 @@ get_actor_cate <- function(data) {
         str_detect(actor1, regex("Civilians", ignore_case = TRUE)) ~ "Civilians",
         # External/Other forces
         str_detect(actor1, regex("External|Other forces", ignore_case = TRUE)) ~ "External/Other forces",
+        #IS or Boko Haram
+        str_detect(actor1, regex("Islamic State West Africa Province|Boko Haram|ISWAP", ignore_case = TRUE)) ~ "ISWAP and/or Boko Haram",
         
         
-        # Otherwise, NA
-        TRUE ~ NA_character_
+        # For 0therwise, NA
+        TRUE ~ actor1
       ),
       actor_category = gsub(":.*","",actor_category)
     )

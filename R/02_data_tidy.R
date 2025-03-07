@@ -33,7 +33,7 @@ data <- raw_data %>%
     
     actor1 = case_when(
       # State forces: include "Military Forces" / "Police Forces"
-      str_detect(actor1, regex("slamic State West Africa Province (ISWAP) and/or Boko Haram", ignore_case = TRUE)) ~ "ISWAP and/or Boko Haram",
+      str_detect(actor1, regex("Islamic State West Africa Province (ISWAP) and/or Boko Haram", ignore_case = TRUE)) ~ "ISWAP and/or Boko Haram",
       
       str_detect(actor1, regex("Boko Haram", ignore_case = TRUE)) ~ "Boko Haram",
       
