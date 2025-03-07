@@ -233,7 +233,7 @@ The concept should be give advice to the government about:
 
 7.  Conflict Events by Year and Event Type
 
-![](./output/gif/armed_conf_evt_act_year.gif) ![](./output/figures/armed_conf_cumulative.png)
+![](./output/gif/armed_conf_evt_act_year1.gif) ![](./output/figures/armed_conf_cumulative.png)
 
 1.  
 
