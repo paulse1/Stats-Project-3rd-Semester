@@ -217,28 +217,41 @@ The concept should be give advice to the government about:
 -   **Actor Motivations:** Political power struggles, religious ideologies, and economic interests.
 -   **Spatiotemporal Dynamics:** Seasonality of conflicts, geographical diffusion patterns, and the effects of policy interventions.
 
-
-
-
-
-
 ! All actor have the same colors in all plot Plot list
 
 1.  \(1\)
-2.  Event Types/ Actor/Fatality
+
+2.  Event Types/ Actor/Fatality ![](./output/figures/conflict_fata_yr_lin_plot.jpg) ![](./output/figures/conflict_event_yr_lin_plot.jpg)
+
 3.  Nigeria Maps (+cities) with event location
+
 4.  Distribution of each top 10 actos facet by event type  Categorize the actor for better plotting  Better color choice for dots  Remove Civilians
+
 5.  \(2\)
-6.  Basic plots: Pie Chart proportion of event type, cum sum fatalities (3), (4)
+
+6.  Basic plots: Pie Chart proportion of event type, cum sum fatalities (3), (4) ![](./output/figures/event_type_pie_chart.jpg)
+
 7.  Conflict Events by Year and Event Type
-8.  
+
+![](./output/gif/armed_conf_evt_act_year.gif) ![](./output/figures/armed_conf_cumulative.png)
+
+1.  
 
 To try:
 
 1.  Network Descỉptive
+
 2.  Motion of top 10 groups (actor) over time (year)
+
 3.  Line over years for political events
+
 4.  Improve stacked bar chart of events and sub events type
+
 5.  Stacked line chart for fatalities in very month (span: 5 years each)
-6.  Filter out event with time precision 3 for more specific date and time
-7.  Chi-Square Test: Actor vs. Fatality
+
+    (choose one plot)
+
+![](./output/figures/month_total_confli_stack_line_plot.jpg) ![](./output/figures/month_total_fata_stack_line_plot.jpg)
+
+1.  Filter out event with time precision 3 for more specific date and time
+2.  Chi-Square Test: Actor vs. Fatality

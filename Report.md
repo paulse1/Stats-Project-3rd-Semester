@@ -104,7 +104,6 @@
     ![](./output/gif/event_type_year.gif)\
     ![](./output/gif/event_type_month.gif)
 
-
 ## 3.3 Distribution of Actors
 
 *Use long data to fully count actors*\
@@ -139,8 +138,6 @@
     Cramer's V Coefficient
 
 ## 4.3 Time vs Geography
-
-
 
 # 5 Advanced Analysis
 
