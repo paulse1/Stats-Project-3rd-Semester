@@ -12,8 +12,8 @@ library(ggrepel)       # nudiging labels
 ## Additional Data
 ##Petroleum Fields: https://www.nuprc.gov.ng/oil-production-status-report/
 pet_fields <- data.frame(name = c("Bonny", "Brass", "Qua Iboe", "Forcados", "Escravos", "Odudu"),
-                         Longitude = c(4.4355, 4.3020, 4.5429, 5.1833, 5.5166, 4.0000),
-                         Latitude = c(7.1594, 6.2482, 8.0159, 5.1666, 5.0000, 7.7500)
+                         Latitude = c(4.4355, 4.3020, 4.5429, 5.1833, 5.5166, 4.0000),
+                         Longitude = c(7.1594, 6.2482, 8.0159, 5.1666, 5.0000, 7.7500)
 )
 
 ##Cities: https://simplemaps.com/data/ng-cities
@@ -22,6 +22,10 @@ cities <- read_csv("data/raw/ng.csv")
 top10_cities <- cities |>
   arrange(desc(population)) |> 
   head(10)
+
+##Data to be plotted
+work_data_map <- categorized_data |> 
+  filter(actor_category %in% main_actors, event_type == "Battles", geo_precision %in% c(1, 2))
 
 # Get Nigeria boundary data (rnaturalearth)
 nigeria_sf <- ne_countries(country = "Nigeria", returnclass = "sf")
@@ -66,13 +70,30 @@ ggplot() +
        fill = "Elevation (m)",
        x = "Latitude",
        y = "Longitude") +
-  geom_point(data = pet_fields, aes(x = Latitude, y = Longitude, color = "Oil Fields"),  size = 3) +
+  geom_point(data = work_data_map, aes(x = longitude, y = latitude, color = actor_category), alpha = 0.5) +
+  geom_point(data = pet_fields, aes(x = Longitude, y = Latitude, color = "Oil Fields"),  size = 3) +
   geom_point(data = top10_cities, aes(x = lng, y = lat, color = "Cities"), size = 3) +
   geom_text_repel(data = top10_cities, aes(x = lng, y = lat, label = city)) +
-  scale_color_manual(name = "Points of Interest",
+  # scale_color_manual(name = "Points of Interest",
+  #                    values = c("Oil Fields" = "blue",
+  #                               "Cities" = "red")
+  #                    ) +
+  scale_color_manual(name = "Battles and Points of Interest",
                      values = c("Oil Fields" = "blue",
-                                "Cities" = "red")
-                     ) +
+                                "Cities" = "red",
+                                "Identity militia" = "purple",
+                                "ISWAP and/or Boko Haram" = "yellow3",
+                                "Political militia" = "orangered3",
+                                "State forces" = "cyan",
+                                "Unidentified Armed Group" = "pink"),
+                     breaks = c("Cities",
+                                "Oil Fields",
+                                "Identity militia",
+                                "ISWAP and/or Boko Haram",
+                                "Political militia",
+                                "State forces",
+                                "Unidentified Armed Group")
+  ) +
   theme_minimal()
 
 
