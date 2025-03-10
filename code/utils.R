@@ -72,6 +72,43 @@ get_actor_cate <- function(data) {
   return(data)
 }
 
+
+get_actor_cate2 <- function(data) {
+  
+  data <- data |>
+    mutate(
+      actor2 = gsub("\\(.*?\\)", "", actor2),
+      
+      actor_category2 = case_when(
+        # State forces: include "Military Forces" / "Police Forces"
+        str_detect(actor2, regex("Military Forces|Police Forces", ignore_case = TRUE)) ~ "State forces",
+        # Rebel groups: include "Rebel"
+        str_detect(actor2, regex("Rebel", ignore_case = TRUE)) ~ "Rebel group",
+        # Identity militias: contains "militia" + identity-related keywords
+        str_detect(actor2, regex("militia", ignore_case = TRUE)) &
+          str_detect(actor2, regex("tribal|communal|ethnic|clan|religious|caste", ignore_case = TRUE)) ~ "Identity militia",
+        # Political militias: contains "militia" (but not flagged as identity militias)
+        str_detect(actor2, regex("militia", ignore_case = TRUE)) ~ "Political militia",
+        # Rioters
+        str_detect(actor2, regex("Rioters", ignore_case = TRUE)) ~ "Rioters",
+        # Protesters
+        str_detect(actor2, regex("Protesters", ignore_case = TRUE)) ~ "Protesters",
+        # Civilians
+        str_detect(actor2, regex("Civilians", ignore_case = TRUE)) ~ "Civilians",
+        # External/Other forces
+        str_detect(actor2, regex("External|Other forces", ignore_case = TRUE)) ~ "External/Other forces",
+        
+        # Otherwise, NA
+        TRUE ~ NA_character_
+      ),
+      actor_category2 = gsub(":.*","",actor_category2),
+    )
+  
+  return(data)
+}
+
+
+
 # 
 # str_detect(actor1, regex("Islamic State West Africa Province|Boko Haram", ignore_case = TRUE)) ~ "ISWAP and/or Boko Haram",
 # 

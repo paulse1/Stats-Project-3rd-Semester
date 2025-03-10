@@ -6,9 +6,11 @@ library(sf)            # vector spatial data handling
 library(elevatr)       # elevation data
 library(stars)         # converting raster data and generating contours
 library(rnaturalearth) # natural earth boundary data
-
+library(ggplot2)
 # Read in the processed data from the RDS file
 data <- readRDS("data/intermediate/processed_data.RDS")
+
+
 
 
 
@@ -44,16 +46,31 @@ contours <- st_contour(elev_stars["elevation"], breaks = breaks)
 # stars object -> df
 elev_df <- as.data.frame(elev_stars, xy = TRUE)
 
-ggplot() +
+
+pop_places <- ne_download(scale = "medium", 
+                          type = "populated_places", 
+                          category = "cultural", 
+                          returnclass = "sf")
+
+nigeria_cities <- subset(pop_places, ADM0NAME == "Nigeria")
+top10_cities <- nigeria_cities[order(nigeria_cities$POP_MAX, decreasing = TRUE), ][1:10, ]
+
+
+
+p <- ggplot() +
   geom_raster(data = elev_df, aes(x = x, y = y, fill = elevation)) +
   scale_fill_gradient(low = "white", high = "dark green") +
   #geom_sf(data = contours, color = "white", size = 0.01, alpha = 0.1) + # optional contour lines
   geom_sf(data = nigeria_sf, fill = NA, color = "black") +
   geom_point(data = data, aes(x = longitude, y = latitude), alpha = 0.01, color = "dark red", size = 2) +
+  geom_sf(data = top10_cities, shape = 17, size = 3, color = "blue") +
+  geom_sf_text(data = top10_cities, aes(label = NAME), 
+               size = 3, nudge_y = 0.2, color = "blue") +
   coord_sf() +
   labs(title = "Nigeria Elevation Contour Map with Conflict Events",
        fill = "Elevation (m)",
        x = "Longitude",
        y = "Latitude") +
   theme_minimal()
+ggsave("output/figures/Nigeria_Elevation_Conflict_Top10Cities.png", plot = p, width = 10, height = 8, dpi = 300)
 
