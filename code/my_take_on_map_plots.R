@@ -141,3 +141,35 @@ ggsave("output/figures/06_nigeria_map_with_battles.png",
        width = 8,
        height = 6,
        units = "in")
+
+## Plotting Protest in Nigeria
+
+protest_data <- wide_data_categorized |> 
+  filter(event_type %in% c("Riots", "Protests"))
+
+protest_in_nigeria <- ggplot() +
+  geom_sf(data = nigeria_sf, fill = NA, color = "black", lwd = 1) +
+  coord_sf() +
+  geom_jitter(data = protest_data, aes(x = longitude, y = latitude, colour = event_type)) +
+  geom_point(data = top10_cities, aes(x = lng, y = lat, color = "Cities"), size = 3) +
+  labs(title = "Map of Nigeria with Riots and Protests",
+       x = "Longitude",
+       y = "Latitude") +
+  scale_color_manual(name = "Cities, Protests and Riots",
+                     values = c("Oil Fields" = "blue",
+                                "Cities" = "black",
+                                "Riots" = palette[[1]],
+                                "Protests" = palette[[2]]
+                     ),
+                     breaks = c("Cities",
+                                "Oil Fields",
+                                "Riots",
+                                "Protests"
+                                )
+  )
+
+ggsave("output/figures/07_map_with_protest_and_riots.png",
+       protest_in_nigeria,
+       width = 8,
+       height = 6,
+       units = "in")
