@@ -18,10 +18,10 @@
 
 ![](output/figures/08_network_graph.png)
 
-![](output/gif/event_type_month.gif)
-
 ![](output/gif/battles.gif)
 
 ![](output/gif/event_type_year.gif)
 
 ![](output/gif/protests.gif)
+
+![](output/gif/event_type_month.gif)
