@@ -61,9 +61,9 @@ V(g2)$degree <- degree(g2)
 set.seed(1)
 
 p2 <- ggraph(g2, layout = "fr") +
-  geom_edge_link(aes(width = total_fatalities), color = "black", alpha = 0.08) +
+  geom_edge_link(aes(width = total_fatalities), color = "black", alpha = 0.3) +
   geom_node_point(size = 8, color = "tomato") +
-  geom_node_text(aes(label = name), repel = TRUE, size = 3) +
+  geom_node_text(aes(label = name), size = 3, repel = TRUE) +
   scale_edge_width(range = c(0.2, 3), name = "Total Fatalities") +
   labs(title = "Actor Category Network by Fatalities")
 
