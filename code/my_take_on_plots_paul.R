@@ -1,5 +1,7 @@
 ##For this Skript "R/02_data_tidy.R" and "code/utils.R" need to be sourced
 
+theme_set(theme_bw())
+
 ## removing trailing whitespace from actor1 strings
 data <- data |> mutate(actor1 = gsub(" $", "", actor1))
 
@@ -14,10 +16,11 @@ main_actors_table <- categorized_data |>
   summarise(n = n(),
             total_deaths_associated = sum(fatalities, na.rm = TRUE),
             fatalities_per_observation = total_deaths_associated / n) |>
-  arrange(desc(n))
+  arrange(desc(total_deaths_associated))
 
 ## Using this to determine the Main Actors
 main_actors <- head(main_actors_table, 5)$actor_category
+main_actors3 <- head(main_actors_table, 3)$actor_category
 
 ## Which groups are especially harmful towards Civilians ?
 
@@ -50,9 +53,14 @@ vtc_plot <- work_data_vtc |>
   labs(title = "Cumulated Deaths of Civilians in Attacks Directly Aimed at Civilians by Perpetrator",
        y = "Cumulative Sum of Deaths",
        x = "Event Date") +
-  theme_bw() +
   scale_colour_discrete(name = "Perpetrator") +
   scale_x_continuous(breaks = pretty(work_data_vtc$event_date, n = 6))
+
+ggsave("output/figures/02_grouped_violence_towards_civilians_plot.png",
+       vtc_plot,
+       width = 8,
+       height = 6,
+       units = "in")
 
 ## Notes: Boko Haram/IS and identity militias are the biggest murderers of civilians,
 ## Big Spike in ~ 2014
@@ -76,4 +84,27 @@ fatalities_per_group_plot <- categorized_data |>
   summarise(deaths = sum(fatalities, na.rm = TRUE)) |> 
   mutate(cum_deaths = cumsum(deaths)) |> 
   ggplot(aes(x = event_date, y = cum_deaths, colour = actor_category)) +
-  geom_line()
+  geom_line() +
+  labs(title = "Cumulative Deaths over Time per Group",
+       x = "Event Date",
+       y = "Cumulative Deaths") +
+  scale_color_discrete(name = "Actor Category") +
+  scale_x_continuous(breaks = pretty(categorized_data$event_date, n = 6))
+
+ggsave("output/figures/01_fatalities_per_group_plot.png",
+       fatalities_per_group_plot,
+       width = 8,
+       height = 6,
+       units = "in")
+
+## Facetted Barplot Actors/Event Type
+
+categorized_data |> 
+  filter(event_type %in% c("Battles", "Explosions/Remote violence")) |>
+  group_by(sub_event_type) |>
+  filter(n() > 200) |> 
+  ungroup() |> 
+  filter(actor_category %in% main_actors) |> 
+  ggplot(aes(x = sub_event_type)) +
+  geom_bar() +
+  facet_grid(rows = vars(actor_category))

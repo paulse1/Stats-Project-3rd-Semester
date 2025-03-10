@@ -70,7 +70,7 @@ ggplot() +
        fill = "Elevation (m)",
        x = "Latitude",
        y = "Longitude") +
-  geom_point(data = work_data_map, aes(x = longitude, y = latitude, color = actor_category), alpha = 0.5) +
+  geom_point(data = work_data_map, aes(x = longitude, y = latitude, color = actor_category), size = 0.5, alpha = 1) +
   geom_point(data = pet_fields, aes(x = Longitude, y = Latitude, color = "Oil Fields"),  size = 3) +
   geom_point(data = top10_cities, aes(x = lng, y = lat, color = "Cities"), size = 3) +
   geom_text_repel(data = top10_cities, aes(x = lng, y = lat, label = city)) +
