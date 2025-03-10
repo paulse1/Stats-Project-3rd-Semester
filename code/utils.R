@@ -34,7 +34,7 @@ del_actor_regi <- function(data) {
   return(data)
 }
 
-
+##actor category functions
 
 get_actor_cate <- function(data) {
   
@@ -73,17 +73,42 @@ get_actor_cate <- function(data) {
   return(data)
 }
 
-# 
-# str_detect(actor1, regex("Islamic State West Africa Province|Boko Haram", ignore_case = TRUE)) ~ "ISWAP and/or Boko Haram",
-# 
-# str_detect(actor1, regex("Islamic State West Africa Province", ignore_case = TRUE)) ~ "ISWAP",
-# 
-# str_detect(actor1, regex("Unidentified Armed Group", ignore_case = TRUE)) ~ "Unidentified",
-# 
-
-
-
-
+get_actor_cate2 <- function(data) {
+  
+  data <- data |>
+    mutate(
+      actor2 = gsub("\\(.*?\\)", "", actor2),
+      
+      actor_category2 = case_when(
+        # State forces: include "Military Forces" / "Police Forces"
+        str_detect(actor2, regex("Military Forces|Police Forces", ignore_case = TRUE)) ~ "State forces",
+        # Rebel groups: include "Rebel"
+        str_detect(actor2, regex("Rebel", ignore_case = TRUE)) ~ "Rebel group",
+        # Identity militias: contains "militia" + identity-related keywords
+        str_detect(actor2, regex("militia", ignore_case = TRUE)) &
+          str_detect(actor2, regex("tribal|communal|ethnic|clan|religious|caste", ignore_case = TRUE)) ~ "Identity militia",
+        # Political militias: contains "militia" (but not flagged as identity militias)
+        str_detect(actor2, regex("militia", ignore_case = TRUE)) ~ "Political militia",
+        # Rioters
+        str_detect(actor2, regex("Rioters", ignore_case = TRUE)) ~ "Rioters",
+        # Protesters
+        str_detect(actor2, regex("Protesters", ignore_case = TRUE)) ~ "Protesters",
+        # Civilians
+        str_detect(actor2, regex("Civilians", ignore_case = TRUE)) ~ "Civilians",
+        # External/Other forces
+        str_detect(actor2, regex("External|Other forces", ignore_case = TRUE)) ~ "External/Other forces",
+        #IS or Boko Haram
+        str_detect(actor2, regex("Islamic State West Africa Province|Boko Haram|ISWAP", ignore_case = TRUE)) ~ "ISWAP and/or Boko Haram",
+        
+        
+        # For 0therwise, NA
+        TRUE ~ actor2
+      ),
+      actor_category2 = gsub(":.*","",actor_category2)
+    )
+  
+  return(data)
+}
 
 
 longer_source_scale <- function(data) {
@@ -98,4 +123,22 @@ longer_source_scale <- function(data) {
     select(-source_scale_type)
   
   return(data)
+}
+
+## Function to add month/year or year
+
+year_month_function <- function(x) {
+  assert_tibble(x)
+  x |> 
+    arrange(event_date) |> 
+    mutate(year_month = format(event_date, "%Y-%B")) |> 
+    mutate(year_month = factor(year_month, levels = unique(year_month)))
+}
+
+year_function <- function(x) {
+  assert_tibble(x)
+  x |> 
+    arrange(event_date) |> 
+    mutate(year = format(event_date, "%Y")) |> 
+    mutate(year = factor(year, levels = unique(year)))
 }
