@@ -1,6 +1,7 @@
 library(gapminder)
 library(maps)
 library(gifski)
+library(gganimate)
 
 processed_data <- readRDS("data/intermediate/processed_data.RDS")
 

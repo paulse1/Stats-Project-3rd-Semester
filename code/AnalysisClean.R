@@ -25,21 +25,25 @@ cata_act_data <- get_actor_cate(processed_data)
 # pie chart
 
 # Assuming processed_data is your data frame
+# Assuming widened_data is your data frame
 event_type_pi <- widened_data %>%
   group_by(event_type) %>%  # Group by event_type
-  summarise(count = n()) %>%  # Count the number of occurrences for each event_type
-  mutate(percentage = count / sum(count) * 100)  # Calculate percentage
+  summarise(count = sum(fatalities), .groups = "drop") %>%  # Sum the fatalities for each event_type
+  mutate(percentage = count / sum(count) * 100)  # Calculate percentage based on total fatalities
 
 # Create a pie chart
 event_type_pi_plot <- ggplot(event_type_pi, aes(x = "", y = count, fill = event_type)) +
-  geom_bar(stat = "identity", width = 1) +  # Create a stacked bar chart
+  geom_bar(stat = "identity", width = 1) +  # Create a bar chart
   coord_polar("y", start = 0) +  # Convert to a pie chart
   theme_void() +  # Remove background and axes
-  labs(fill = "Event Type") +  # Set legend title
-  geom_text(aes(label = paste0(round(percentage, 1), "%")),  # Add percentage labels
-            position = position_stack(vjust = 0.5))
-ggsave("output/figures/event_type_pie_chart.png", plot = event_type_pi_plot, width = 8, height = 6, dpi = 300)
+  labs(title = "Fatalities Percentage in Each Event Type", fill = "Event Type") +  # Set legend title
+  
+  # Add percentage labels, but exclude those < 0.1%
+  geom_text(aes(label = ifelse(percentage >= 0.5, paste0(round(percentage, 1), "%"), "")),  # Only show labels for percentages >= 0.1%
+            position = position_stack(vjust = 0.5))  # Position labels in the middle of each slice
 
+# Save the plot
+ggsave("output/figures/event_type_pie_chart.jpg", plot = event_type_pi_plot, width = 8, height = 6, dpi = 300)
 
 # compare counts of sub event types 
 # Stacked Bar Chart of types and sub types
@@ -153,17 +157,41 @@ sort_dated_data <- widened_data %>%
 
 conflicts_by_year <- sort_dated_data %>%
   group_by(year) %>%
+  summarise(count = sum(fatalities))
+
+# Plot 4a: Line Chart of Conflict Events by Year
+conflict_fata_yr_lin <- ggplot(conflicts_by_year, aes(x = year, y = count)) +
+  geom_line(color = "black") +
+  geom_point(color = "black") +
+  labs(title = "Number of Fatalities by Year",
+       x = "Year", y = "Number of Fatalities")+
+  theme_minimal()
+
+
+ggsave("output/figures/conflict_fata_yr_lin_plot.jpg", plot = conflict_fata_yr_lin, width = 8, height = 6, dpi = 300)
+
+sort_dated_data <- widened_data %>%
+  mutate(year = year(event_date),
+         month = month(event_date, label = TRUE)) %>%
+  filter(year != 2025)
+
+conflicts_by_year <- sort_dated_data %>%
+  group_by(year) %>%
   summarise(count = n())
 
 # Plot 4a: Line Chart of Conflict Events by Year
 conflict_event_yr_lin <- ggplot(conflicts_by_year, aes(x = year, y = count)) +
-  geom_line(color = "darkgreen") +
-  geom_point(color = "darkgreen") +
-  labs(title = "Conflict Events by Year",
-       x = "Year", y = "Number of Events")
+  geom_line(color = "black") +
+  geom_point(color = "black") +
+  labs(title = "Confilict Events by Year",
+       x = "Year", y = "Number of Events")+
+  theme_minimal()
 
 
-ggsave("output/figures/conflict_event_yr_lin_plot.png", plot = conflict_event_yr_lin, width = 8, height = 6, dpi = 300)
+ggsave("output/figures/conflict_event_yr_lin_plot.jpg", plot = conflict_event_yr_lin, width = 8, height = 6, dpi = 300)
+
+
+
 
 
 # to explore the trend of each type of event
@@ -185,7 +213,52 @@ ggsave("output/figures/conflict_event_yr_typ_lin_plot.png", plot = conflict_even
 
 
 
-# to explore the seasonal periodicity of total number of events 
+
+
+group_yr_data <- sort_dated_data %>%
+  mutate(five_year_group = cut(year, breaks = seq(min(year), max(year) + 5, by = 5), right = FALSE))%>%
+  mutate(five_year_group = factor(five_year_group, levels = unique(five_year_group)))
+
+
+
+monthly_totals <- group_yr_data %>%
+  group_by(five_year_group, month) %>%
+  summarise(total_events = n(), .groups = "drop")
+
+
+month_total_confli_stack_line <- ggplot(monthly_totals, aes(x = month, y = total_events, fill = five_year_group, group = five_year_group)) +
+  geom_area(position = "stack", alpha = 0.6) + 
+
+  labs(title = "Stacked Line Plot of Monthly Conflict Events (Grouped by 5-Year Periods)",
+       x = "Month", 
+       y = "Total Number of Events",
+       fill = "Five-Year Period") +
+  theme_minimal()
+
+
+ggsave("output/figures/month_total_confli_stack_line_plot.jpg", plot = month_total_confli_stack_line, width = 8, height = 6, dpi = 300)
+
+
+
+monthly_totals_fat <- group_yr_data %>%
+  group_by(five_year_group, month) %>%
+  summarise(total_events = sum(fatalities), .groups = "drop")
+
+
+month_total_fata_stack_line <- ggplot(monthly_totals_fat, aes(x = month, y = total_events, fill = five_year_group, group = five_year_group)) +
+  geom_area(position = "stack", alpha = 0.6) + 
+  
+  labs(title = "Stacked Line Plot of Monthly Fatalities (Grouped by 5-Year Periods)",
+       x = "Month", 
+       y = "Total Number of Fatalities",
+       fill = "Five-Year Period") +
+  theme_minimal()
+
+ggsave("output/figures/month_total_fata_stack_line_plot.jpg", plot = month_total_fata_stack_line, width = 8, height = 6, dpi = 300)
+
+
+
+
 # line chart: month - count of event type (sum)
 
 monthly_totals <- sort_dated_data %>%
