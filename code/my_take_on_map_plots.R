@@ -8,6 +8,7 @@ library(elevatr)       # elevation data
 library(stars)         # converting raster data and generating contours
 library(rnaturalearth) # natural earth boundary data
 library(ggrepel)       # nudiging labels
+library(RColorBrewer)  # brewer palettes
 
 ## Additional Data
 ##Petroleum Fields: https://www.nuprc.gov.ng/oil-production-status-report/
@@ -25,7 +26,7 @@ top10_cities <- cities |>
 
 ##Data to be plotted
 work_data_map <- categorized_data |> 
-  filter(actor_category %in% main_actors, event_type == "Battles", geo_precision %in% c(1, 2))
+  filter(actor_category %in% main_actors3, event_type == "Battles", geo_precision %in% c(1, 2))
 
 # Get Nigeria boundary data (rnaturalearth)
 nigeria_sf <- ne_countries(country = "Nigeria", returnclass = "sf")
@@ -59,28 +60,25 @@ contours <- st_contour(elev_stars["elevation"], breaks = breaks)
 # stars object -> df
 elev_df <- as.data.frame(elev_stars, xy = TRUE)
 
-ggplot() +
+##Plotting just the Map
+
+just_map <- ggplot() +
   geom_raster(data = elev_df, aes(x = x, y = y, fill = elevation)) +
   scale_fill_gradient(low = "white", high = "dark green") +
   # geom_sf(data = contours, color = "white", size = 0.01, alpha = 0.1) + # optional contour lines
   geom_sf(data = nigeria_sf, fill = NA, color = "black", lwd = 1) +
-  # geom_point(data = data, aes(x = longitude, y = latitude), alpha = 0.01, color = "dark red", size = 2) +
   coord_sf() +
-  labs(title = "Nigeria Elevation Contour Map with Conflict Events",
+  labs(title = "Nigeria Elevation Contour Map with Points of Interest",
        fill = "Elevation (m)",
-       x = "Latitude",
-       y = "Longitude") +
-  geom_point(data = work_data_map, aes(x = longitude, y = latitude, color = actor_category), size = 0.5, alpha = 1) +
+       x = "Longitude",
+       y = "Latitude") +
+  # geom_jitter(data = work_data_map, aes(x = longitude, y = latitude, color = actor_category), size = 1, alpha = 1) +
   geom_point(data = pet_fields, aes(x = Longitude, y = Latitude, color = "Oil Fields"),  size = 3) +
   geom_point(data = top10_cities, aes(x = lng, y = lat, color = "Cities"), size = 3) +
-  geom_text_repel(data = top10_cities, aes(x = lng, y = lat, label = city)) +
-  # scale_color_manual(name = "Points of Interest",
-  #                    values = c("Oil Fields" = "blue",
-  #                               "Cities" = "red")
-  #                    ) +
-  scale_color_manual(name = "Battles and Points of Interest",
+  geom_text_repel(data = top10_cities, aes(x = lng, y = lat, label = city), size = 4) +
+  scale_color_manual(name = "Points of Interest",
                      values = c("Oil Fields" = "blue",
-                                "Cities" = "red",
+                                "Cities" = "black",
                                 "Identity militia" = "purple",
                                 "ISWAP and/or Boko Haram" = "yellow3",
                                 "Political militia" = "orangered3",
@@ -93,7 +91,85 @@ ggplot() +
                                 "Political militia",
                                 "State forces",
                                 "Unidentified Armed Group")
-  ) +
-  theme_minimal()
+  )
 
+ggsave("output/figures/05_just_nigeria_map.png",
+       just_map,
+       width = 8,
+       height = 6,
+       units = "in")
 
+## Plotting Battles colored by Actors
+
+#creating a brewer palette
+
+palette <- brewer.pal(n = 5, name = "Set1")
+
+battles_in_nigeria <- ggplot() +
+  # geom_raster(data = elev_df, aes(x = x, y = y, fill = elevation)) +
+  # scale_fill_gradient(low = "white", high = "dark green") +
+  # geom_sf(data = contours, color = "white", size = 0.01, alpha = 0.1) + # optional contour lines
+  geom_sf(data = nigeria_sf, fill = NA, color = "black", lwd = 1) +
+  coord_sf() +
+  labs(title = "Map of Nigeria with Battles grouped by Top 3 Actors",
+       fill = "Elevation (m)",
+       x = "Longitude",
+       y = "Latitude") +
+  geom_jitter(data = work_data_map, aes(x = longitude, y = latitude, color = actor_category), size = 1.25, alpha = 1) +
+  # geom_point(data = pet_fields, aes(x = Longitude, y = Latitude, color = "Oil Fields"),  size = 3) +
+  geom_point(data = top10_cities, aes(x = lng, y = lat, color = "Cities"), size = 3) +
+  # geom_text_repel(data = top10_cities, aes(x = lng, y = lat, label = city), size = 4) +
+  scale_color_manual(name = "Cities and Battles",
+                     values = c("Oil Fields" = "blue",
+                                "Cities" = "black",
+                                "Identity militia" = palette[[1]],
+                                "ISWAP and/or Boko Haram" = palette[[2]],
+                                "Political militia" = palette[[5]],
+                                "State forces" = palette[[3]],
+                                "Unidentified Armed Group" = palette[[4]]),
+                     breaks = c("Cities",
+                                "Oil Fields",
+                                "Identity militia",
+                                "ISWAP and/or Boko Haram",
+                                "Political militia",
+                                "State forces",
+                                "Unidentified Armed Group")
+  )
+
+ggsave("output/figures/06_nigeria_map_with_battles.png",
+       battles_in_nigeria,
+       width = 8,
+       height = 6,
+       units = "in")
+
+## Plotting Protest in Nigeria
+
+protest_data <- wide_data_categorized |> 
+  filter(event_type %in% c("Riots", "Protests"))
+
+protest_in_nigeria <- ggplot() +
+  geom_sf(data = nigeria_sf, fill = NA, color = "black", lwd = 1) +
+  coord_sf() +
+  geom_jitter(data = protest_data, aes(x = longitude, y = latitude, colour = event_type)) +
+  geom_point(data = top10_cities, aes(x = lng, y = lat, color = "Cities"), size = 3) +
+  labs(title = "Map of Nigeria with Riots and Protests",
+       x = "Longitude",
+       y = "Latitude") +
+  scale_color_manual(name = "Cities, Protests and Riots",
+                     values = c("Oil Fields" = "blue",
+                                "Cities" = "black",
+                                "Riots" = palette[[1]],
+                                "Protests" = palette[[2]]
+                     ),
+                     breaks = c("Cities",
+                                "Oil Fields",
+                                "Riots",
+                                "Protests"
+                                )
+  )
+
+ggsave("output/figures/07_map_with_protest_and_riots.png",
+       protest_in_nigeria,
+       width = 8,
+       height = 6,
+       units = "in")
