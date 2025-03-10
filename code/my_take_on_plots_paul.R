@@ -100,10 +100,11 @@ ggsave("output/figures/01_fatalities_per_group_plot.png",
 ## Facetted Barplot Actors/Event Type
 
 group_names <- c("Identity militia" = "Identity Militia",
-                    "ISWAP and/or Boko Haram" = "IS/Boko Haram",
-                    "Political militia" = "Political Militia",
-                    "State forces" = "State Forces",
-                    "Unidentified Armed Group" = "Unidentified")
+                 "ISWAP and/or Boko Haram" = "IS/Boko Haram",
+                 "Political militia" = "Political Militia",
+                 "State forces" = "State Forces",
+                 "Unidentified Armed Group" = "Unidentified",
+                 "Unidentified or small group" = "Unidentified/Small")
 
 facetted_bar_plot_remote_violence <- categorized_data |> 
   filter(event_type %in% c("Explosions/Remote violence")) |>
@@ -128,6 +129,39 @@ facetted_bar_plot_remote_violence <- categorized_data |>
 
 ggsave("output/figures/03_facetted_remote_violence.png",
        facetted_bar_plot_remote_violence,
+       width = 8,
+       height = 6,
+       units = "in")
+
+## Violence towards Civilians facetted Plot
+
+facetted_bar_plot_violence_towards_civilians <- work_data_vtc |> 
+  mutate(actor_category = case_when(
+    actor_category %in% main_actors ~ actor_category,
+    TRUE ~ "Unidentified Armed Group"
+  )) |>
+  mutate(actor_category = case_when(
+    actor_category == "Unidentified Armed Group" ~ "Unidentified or small group",
+    TRUE ~ actor_category
+  )) |>
+  group_by(sub_event_type, actor_category) |>
+  filter(n() > 25) |> 
+  ungroup() |>
+  ggplot(aes(x = sub_event_type)) +
+  geom_bar() +
+  facet_grid(rows = vars(actor_category), labeller = as_labeller(group_names)) +
+  labs(title = "Facetted Bar Plot of Type of Violence Towards Civilians by Actors",
+       y = "Count of Event",
+       x = "Event Type") +
+  scale_x_discrete(labels = c("Abduction",
+                              "Attack",
+                              "Mob Violence",
+                              "IED/Landmine",
+                              "Sexual Violence",
+                              "Suicide Bomb"))
+
+ggsave("output/figures/04_facetted_sub_event_towards_civilians.png",
+       facetted_bar_plot_violence_towards_civilians,
        width = 8,
        height = 6,
        units = "in")
