@@ -99,12 +99,35 @@ ggsave("output/figures/01_fatalities_per_group_plot.png",
 
 ## Facetted Barplot Actors/Event Type
 
-categorized_data |> 
-  filter(event_type %in% c("Battles", "Explosions/Remote violence")) |>
-  group_by(sub_event_type) |>
-  filter(n() > 200) |> 
+group_names <- c("Identity militia" = "Identity Militia",
+                    "ISWAP and/or Boko Haram" = "IS/Boko Haram",
+                    "Political militia" = "Political Militia",
+                    "State forces" = "State Forces",
+                    "Unidentified Armed Group" = "Unidentified")
+
+facetted_bar_plot_remote_violence <- categorized_data |> 
+  filter(event_type %in% c("Explosions/Remote violence")) |>
+  group_by(sub_event_type, actor_category) |>
+  filter(n() > 20) |> 
   ungroup() |> 
   filter(actor_category %in% main_actors) |> 
   ggplot(aes(x = sub_event_type)) +
   geom_bar() +
-  facet_grid(rows = vars(actor_category))
+  facet_grid(rows = vars(actor_category), labeller = as_labeller(group_names)) +
+  scale_x_discrete(labels = c("Air/Drone Strike",
+                              "IED/Landmine",
+                              "Artillery/Missile",
+                              "Suicide Bomb")
+                   ) +
+  labs(title = "Bar Plot of Counts of Remote Violence Associated with Actors",
+       y = "Count of Event",
+       x = "Event Type",
+       caption = "Note: Due to the structure of the data, it is not possible to
+       determine who the perpetrator is in these cases. So having used one type
+       of violence and having received it are both counted in this plot!")
+
+ggsave("output/figures/03_facetted_remote_violence.png",
+       facetted_bar_plot_remote_violence,
+       width = 8,
+       height = 6,
+       units = "in")
