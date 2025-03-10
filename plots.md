@@ -17,3 +17,11 @@
 ![](output/figures/07_map_with_protest_and_riots.png)
 
 ![](output/figures/08_network_graph.png)
+
+![](output/gif/event_type_month.gif)
+
+![](output/gif/battles.gif)
+
+![](output/gif/event_type_year.gif)
+
+![](output/gif/protests.gif)
