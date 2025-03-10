@@ -15,3 +15,5 @@
 ![](output/figures/06_nigeria_map_with_battles.png)
 
 ![](output/figures/07_map_with_protest_and_riots.png)
+
+![](output/figures/08_network_graph.png)
