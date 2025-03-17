@@ -96,15 +96,29 @@ ggsave("output/figures/02_pie_chart_event_types.png",
        height = 6,
        units = "in")
 
-##KINDA USELESS:
-## Presence of Groups over time
-presence_of_groups_plot <- categorized_data |> 
-  filter(actor_category %in% main_actors) |> 
-  group_by(actor_category, event_date) |> 
+## Lineplot of event types over time
+
+work_data_events <- wide_data_categorized |>
+  year_function() |> 
+  filter(year != 2025)
+
+event_type_year_plot <- work_data_events |> 
+  group_by(event_type, year) |> 
   summarise(n = n()) |> 
-  mutate(cum_sum = cumsum(n)) |> 
-  ggplot(aes(x = event_date, y = cum_sum, colour = actor_category)) +
-  geom_line()
+  ggplot(aes(x = as.numeric(year), y = n, colour = event_type)) +
+  geom_line() +
+  labs(title = "Count of Yearly Events from 1997 to 2024 by Type",
+       y = "Event Count",
+       x = "Year") +
+  scale_colour_discrete(name = "Event Type") +
+  scale_x_continuous(breaks = seq(1, length(levels(work_data_events$year)), by = 3),
+                     labels = levels(work_data_events$year)[seq(1, length(levels(work_data_events$year)), by = 3)])
+
+ggsave("output/figures/03_lineplot_event_types.png",
+       event_type_year_plot,
+       width = 8,
+       height = 6,
+       units = "in")
 
 ## Fatalities as Alternative
 fatalities_per_group_plot <- categorized_data |> 
@@ -120,7 +134,7 @@ fatalities_per_group_plot <- categorized_data |>
   scale_color_discrete(name = "Actor Category") +
   scale_x_continuous(breaks = pretty(categorized_data$event_date, n = 6))
 
-ggsave("output/figures/03_fatalities_per_group_plot.png",
+ggsave("output/figures/04_fatalities_per_group_plot.png",
        fatalities_per_group_plot,
        width = 8,
        height = 6,
@@ -156,7 +170,7 @@ facetted_bar_plot_remote_violence <- categorized_data |>
        determine who the perpetrator is in these cases. So having used one type
        of violence and having received it are both counted in this plot!")
 
-ggsave("output/figures/04_facetted_remote_violence.png",
+ggsave("output/figures/05_facetted_remote_violence.png",
        facetted_bar_plot_remote_violence,
        width = 8,
        height = 6,
@@ -189,7 +203,7 @@ facetted_bar_plot_violence_towards_civilians <- work_data_vtc |>
                               "Sexual Violence",
                               "Suicide Bomb"))
 
-ggsave("output/figures/05_facetted_sub_event_towards_civilians.png",
+ggsave("output/figures/06_facetted_sub_event_towards_civilians.png",
        facetted_bar_plot_violence_towards_civilians,
        width = 8,
        height = 6,

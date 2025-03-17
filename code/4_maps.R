@@ -71,7 +71,7 @@ just_map <- ggplot() +
                                 "Unidentified Armed Group")
   )
 
-ggsave("output/figures/06_just_nigeria_map.png",
+ggsave("output/figures/07_just_nigeria_map.png",
        just_map,
        width = 8,
        height = 6,
@@ -109,7 +109,7 @@ battles_in_nigeria <- ggplot() +
                                 "Unidentified Armed Group")
   )
 
-ggsave("output/figures/07_nigeria_map_with_battles.png",
+ggsave("output/figures/08_nigeria_map_with_battles.png",
        battles_in_nigeria,
        width = 8,
        height = 6,
@@ -141,7 +141,7 @@ protest_in_nigeria <- ggplot() +
                                 )
   )
 
-ggsave("output/figures/08_map_with_protest_and_riots.png",
+ggsave("output/figures/09_map_with_protest_and_riots.png",
        protest_in_nigeria,
        width = 8,
        height = 6,

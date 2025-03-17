@@ -70,7 +70,7 @@ p2 <- ggraph(g2, layout = "fr") +
   scale_edge_width(range = c(0.2, 3), name = "Total Fatalities") +
   labs(title = "Actor Category Network by Fatalities")
 
-ggsave("output/figures/09_network_graph.png",
+ggsave("output/figures/10_network_graph.png",
       p2,
       width = 8,
       height = 6,

@@ -35,7 +35,7 @@ protest_in_nigeria_animation <- ggplot() +
   ease_aes("cubic-in-out") +
   shadow_wake(wake_length = 0.15)
 
-anim_protests <- animate(protest_in_nigeria_animation, nframes = 600, fps = 20)
+anim_protests <- animate(protest_in_nigeria_animation, nframes = 800, fps = 20)
 
 anim_save("output/gif/01a_protests.gif", animation = anim_protests)
 
@@ -78,6 +78,6 @@ top_3_battles_animation <- ggplot() +
   ease_aes("cubic-in-out") +
   shadow_wake(wake_length = 0.15)
 
-anim_battles <- animate(top_3_battles_animation, nframes = 600, fps = 20)
+anim_battles <- animate(top_3_battles_animation, nframes = 800, fps = 20)
 
 anim_save("output/gif/02a_battles.gif", animation = anim_battles)
