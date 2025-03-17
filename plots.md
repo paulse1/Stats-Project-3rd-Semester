@@ -34,11 +34,11 @@ Riots and protests seem to be more prevalent in southern Nigeria.
 
 Is event intensity time-dependent?
 
-![](output/gif/battles.gif)
+![](output/gif/02a_battles.gif)
 
 Battles in the northeast seem to have been intensifying since approximately 2013. Battles in central and south Nigeria seem to have been intensifying since approximately 2017.
 
-![](output/gif/protests.gif)
+![](output/gif/01a_protests.gif)
 
 Larger amounts of protests in the south seem to be happening since the end of 2013. Moderate amounts of protests in the north seem to be happening since approximately 2017.
 
