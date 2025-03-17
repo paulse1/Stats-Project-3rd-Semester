@@ -1,12 +1,25 @@
+cat("~ sourcing 2_data_tidy.R ~")
+
 ## Read CSV
-library("tidyverse")
-library("lubridate")
-library("checkmate")
+
 raw_data <- read_csv("data/raw/1997-01-01-2025-01-01-Nigeria.csv")
-# data <- data %>%
-#   mutate(time = timestamp(timestamp))
 
+## Additional Data
 
+##Petroleum Fields: https://www.nuprc.gov.ng/oil-production-status-report/
+pet_fields <- data.frame(name = c("Bonny", "Brass", "Qua Iboe", "Forcados", "Escravos", "Odudu"),
+                         Latitude = c(4.4355, 4.3020, 4.5429, 5.1833, 5.5166, 4.0000),
+                         Longitude = c(7.1594, 6.2482, 8.0159, 5.1666, 5.0000, 7.7500)
+)
+
+##Cities: https://simplemaps.com/data/ng-cities
+
+cities <- read_csv("data/raw/ng.csv")
+top10_cities <- cities |>
+  arrange(desc(population)) |> 
+  head(10)
+
+## Data tidying pipeline
 
 data <- raw_data %>%
   mutate(
@@ -25,26 +38,23 @@ data <- raw_data %>%
     source_scale = gsub('"', '', source_scale)
   )%>%
   drop_na(timestamp)%>%
-
   rename(publish_time = timestamp)%>%
   distinct()%>%
   mutate(
     actor1 = gsub("\\(.*?\\)", "", actor1),
-    
     actor1 = case_when(
-      # State forces: include "Military Forces" / "Police Forces"
-      str_detect(actor1, regex("Islamic State West Africa Province (ISWAP) and/or Boko Haram", ignore_case = TRUE)) ~ "ISWAP and/or Boko Haram",
-      
-      str_detect(actor1, regex("Boko Haram", ignore_case = TRUE)) ~ "Boko Haram",
-      
-      
-      str_detect(actor1, regex("Islamic State West Africa Province", ignore_case = TRUE)) ~ "ISWAP",
-      
+      str_detect(actor1, regex("Islamic State West Africa Province (ISWAP) and/or Boko Haram",
+                               ignore_case = TRUE)) ~ "ISWAP and/or Boko Haram",
+      str_detect(actor1, regex("Boko Haram",
+                               ignore_case = TRUE)) ~ "Boko Haram",
+      str_detect(actor1, regex("Islamic State West Africa Province",
+                               ignore_case = TRUE)) ~ "ISWAP",
       # Otherwise, NA
       TRUE ~ actor1
-    ))
-  
+    )) |>
+  mutate(actor1 = gsub(" $", "", actor1))
 
+##Saving to RDS
+  
 saveRDS(data, "data/intermediate/processed_data.RDS")
-write.csv(data, "data/intermediate/processed_data.csv", row.names = FALSE)
 

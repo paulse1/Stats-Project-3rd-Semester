@@ -1,8 +1,12 @@
-##For this Skript "R/02_data_tidy.R" and "code/utils.R" need to be sourced
+cat("~ sourcing 3_plots.R ~")
 
-theme_set(theme_bw())
+## Code for Plots
+## Notice that the numbers in file names are according to their position in the script
+## and not the position in the presentation
 
 ## removing trailing whitespace from actor1 strings
+## i know this should be in data tidying actually, but i dont want to touch working code
+
 data <- data |> mutate(actor1 = gsub(" $", "", actor1))
 
 categorized_data <- get_actor_cate(data)
@@ -23,6 +27,8 @@ main_actors <- head(main_actors_table, 5)$actor_category
 main_actors3 <- head(main_actors_table, 3)$actor_category
 
 ## Which groups are especially harmful towards Civilians ?
+
+##Use widened data
 
 wide_data_categorized <- get_actor_cate(widened_actor1(data))
 
@@ -56,7 +62,7 @@ vtc_plot <- work_data_vtc |>
   scale_colour_discrete(name = "Perpetrator") +
   scale_x_continuous(breaks = pretty(work_data_vtc$event_date, n = 6))
 
-ggsave("output/figures/02_grouped_violence_towards_civilians_plot.png",
+ggsave("output/figures/01_grouped_violence_towards_civilians_plot.png",
        vtc_plot,
        width = 8,
        height = 6,
@@ -66,6 +72,29 @@ ggsave("output/figures/02_grouped_violence_towards_civilians_plot.png",
 ## Big Spike in ~ 2014
 ## Boko Haram is worse than IS
 ## Unidentified and small groups make up a large fraction
+
+## Create Pie Chart for Overview
+
+pie_chart <- wide_data_categorized |> 
+  group_by(event_type) |> 
+  summarise(n = n()) |>
+  mutate(proportion = n/sum(n),
+         label = paste0(round(proportion * 100), "%"),
+         cumulative = cumsum(n) - (n/2)
+         ) |> 
+  ggplot(aes(x = "", y = proportion, fill = event_type)) +
+  geom_bar(stat = "identity", width = 1) +  # Create bar chart
+  coord_polar(theta = "y", start = 0) +  # Convert to pie chart
+  theme_void() +  # Remove background
+  labs(fill = "Event Type", title = "Proportions of Event Types") +
+  geom_text(aes(label = label),
+            position = position_stack(vjust = 0.5))
+
+ggsave("output/figures/02_pie_chart_event_types.png",
+       pie_chart,
+       width = 8,
+       height = 6,
+       units = "in")
 
 ##KINDA USELESS:
 ## Presence of Groups over time
@@ -91,7 +120,7 @@ fatalities_per_group_plot <- categorized_data |>
   scale_color_discrete(name = "Actor Category") +
   scale_x_continuous(breaks = pretty(categorized_data$event_date, n = 6))
 
-ggsave("output/figures/01_fatalities_per_group_plot.png",
+ggsave("output/figures/03_fatalities_per_group_plot.png",
        fatalities_per_group_plot,
        width = 8,
        height = 6,
@@ -127,7 +156,7 @@ facetted_bar_plot_remote_violence <- categorized_data |>
        determine who the perpetrator is in these cases. So having used one type
        of violence and having received it are both counted in this plot!")
 
-ggsave("output/figures/03_facetted_remote_violence.png",
+ggsave("output/figures/04_facetted_remote_violence.png",
        facetted_bar_plot_remote_violence,
        width = 8,
        height = 6,
@@ -160,7 +189,7 @@ facetted_bar_plot_violence_towards_civilians <- work_data_vtc |>
                               "Sexual Violence",
                               "Suicide Bomb"))
 
-ggsave("output/figures/04_facetted_sub_event_towards_civilians.png",
+ggsave("output/figures/05_facetted_sub_event_towards_civilians.png",
        facetted_bar_plot_violence_towards_civilians,
        width = 8,
        height = 6,

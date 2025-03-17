@@ -1,6 +1,4 @@
-## Run this after my_take_on_map_plots.R and settings.R
-
-library("gganimate")
+cat("~ sourcing 5_animation.R ~")
 
 ##Animating the Protest in Nigeria
 
@@ -39,7 +37,7 @@ protest_in_nigeria_animation <- ggplot() +
 
 anim_protests <- animate(protest_in_nigeria_animation, nframes = 600, fps = 20)
 
-anim_save("output/gif/protests.gif", animation = anim_protests)
+anim_save("output/gif/01a_protests.gif", animation = anim_protests)
 
 ##Animating Top 3 Conflicts in Nigeria
 
@@ -82,4 +80,4 @@ top_3_battles_animation <- ggplot() +
 
 anim_battles <- animate(top_3_battles_animation, nframes = 600, fps = 20)
 
-anim_save("output/gif/battles.gif", animation = anim_battles)
+anim_save("output/gif/02a_battles.gif", animation = anim_battles)

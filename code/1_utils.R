@@ -1,4 +1,7 @@
-library("tidyverse")
+cat("~ sourcing 1_utils.R ~")
+
+# get_actor_region
+
 get_actor_region <- function(data) {
   data <- data |>
     mutate(
@@ -12,6 +15,7 @@ get_actor_region <- function(data) {
   return(data)
 }
 
+# widen data to make ids unqiue
 
 widened_actor1 <- function(data) {
   data <- data |>
@@ -23,6 +27,7 @@ widened_actor1 <- function(data) {
   return(data)
 }
 
+# delete actor region
 
 del_actor_regi <- function(data) {
   
@@ -34,7 +39,7 @@ del_actor_regi <- function(data) {
   return(data)
 }
 
-##actor category functions
+## actor category functions; adds column actor_category (bzw.) actor_category_2
 
 get_actor_cate <- function(data) {
   
@@ -110,11 +115,10 @@ get_actor_cate2 <- function(data) {
   return(data)
 }
 
+#Longer source scale
 
 longer_source_scale <- function(data) {
   data <- data |>
-    
-    
     separate(source_scale, into = c("source_scale1", "source_scale2"), sep = "-", fill = "right") |>
     pivot_longer(cols = c("source_scale1","source_scale2"), 
                  names_to = "source_scale_type", 

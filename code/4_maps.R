@@ -1,28 +1,6 @@
-## Run this after "my_take_on_map_plots.R"
-## Map Code taken from CU's wip branch
+cat("~ sourcing 4_maps.R ~")
 
-#load packages
-library(terra)         # raster data 
-library(sf)            # vector spatial data handling
-library(elevatr)       # elevation data
-library(stars)         # converting raster data and generating contours
-library(rnaturalearth) # natural earth boundary data
-library(ggrepel)       # nudiging labels
-library(RColorBrewer)  # brewer palettes
-
-## Additional Data
-##Petroleum Fields: https://www.nuprc.gov.ng/oil-production-status-report/
-pet_fields <- data.frame(name = c("Bonny", "Brass", "Qua Iboe", "Forcados", "Escravos", "Odudu"),
-                         Latitude = c(4.4355, 4.3020, 4.5429, 5.1833, 5.5166, 4.0000),
-                         Longitude = c(7.1594, 6.2482, 8.0159, 5.1666, 5.0000, 7.7500)
-)
-
-##Cities: https://simplemaps.com/data/ng-cities
-
-cities <- read_csv("data/raw/ng.csv")
-top10_cities <- cities |>
-  arrange(desc(population)) |> 
-  head(10)
+## (credit) Map Code taken from CU's wip branch
 
 ##Data to be plotted
 work_data_map <- categorized_data |> 
@@ -93,7 +71,7 @@ just_map <- ggplot() +
                                 "Unidentified Armed Group")
   )
 
-ggsave("output/figures/05_just_nigeria_map.png",
+ggsave("output/figures/06_just_nigeria_map.png",
        just_map,
        width = 8,
        height = 6,
@@ -106,9 +84,6 @@ ggsave("output/figures/05_just_nigeria_map.png",
 palette <- brewer.pal(n = 5, name = "Set1")
 
 battles_in_nigeria <- ggplot() +
-  # geom_raster(data = elev_df, aes(x = x, y = y, fill = elevation)) +
-  # scale_fill_gradient(low = "white", high = "dark green") +
-  # geom_sf(data = contours, color = "white", size = 0.01, alpha = 0.1) + # optional contour lines
   geom_sf(data = nigeria_sf, fill = NA, color = "black", lwd = 1) +
   coord_sf() +
   labs(title = "Map of Nigeria with Battles grouped by Top 3 Actors",
@@ -116,9 +91,7 @@ battles_in_nigeria <- ggplot() +
        x = "Longitude",
        y = "Latitude") +
   geom_jitter(data = work_data_map, aes(x = longitude, y = latitude, color = actor_category), size = 1.25, alpha = 1) +
-  # geom_point(data = pet_fields, aes(x = Longitude, y = Latitude, color = "Oil Fields"),  size = 3) +
   geom_point(data = top10_cities, aes(x = lng, y = lat, color = "Cities"), size = 3) +
-  # geom_text_repel(data = top10_cities, aes(x = lng, y = lat, label = city), size = 4) +
   scale_color_manual(name = "Cities and Battles",
                      values = c("Oil Fields" = "blue",
                                 "Cities" = "black",
@@ -136,7 +109,7 @@ battles_in_nigeria <- ggplot() +
                                 "Unidentified Armed Group")
   )
 
-ggsave("output/figures/06_nigeria_map_with_battles.png",
+ggsave("output/figures/07_nigeria_map_with_battles.png",
        battles_in_nigeria,
        width = 8,
        height = 6,
@@ -168,7 +141,7 @@ protest_in_nigeria <- ggplot() +
                                 )
   )
 
-ggsave("output/figures/07_map_with_protest_and_riots.png",
+ggsave("output/figures/08_map_with_protest_and_riots.png",
        protest_in_nigeria,
        width = 8,
        height = 6,
