@@ -147,7 +147,7 @@ fatalities_per_group_plot <- categorized_data |>
   mutate(cum_deaths = cumsum(deaths)) |> 
   ggplot(aes(x = event_date, y = cum_deaths, colour = actor_category)) +
   geom_line() +
-  labs(title = "Associated Deaths over Time per Group",
+  labs(title = "Cumulated Associated Deaths over Time per Group",
        x = "Event Date",
        y = "Cumulative Deaths") +
   scale_color_manual(name = "Actor Category", values = palette_actors) +

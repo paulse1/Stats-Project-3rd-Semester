@@ -4,7 +4,9 @@ subtitle: "Grundlegendes Praxisprojekt [w24/25]"
 author: "Gruppe 8: Danh Chau Ngo, Paul Seitz, Marc Landes, Yuxin Qiu, Shuangying Xu"
 institute: "Betreuung: Helen Alber (M.Sc.)"
 date: "2025-03-21"
-format: revealjs
+format:
+  revealjs:
+    slide-number: true
 self-contained: true
 include-in-header: |
   <link rel="preload" href="output/gif/01a_protests.gif" as="image">
