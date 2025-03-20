@@ -72,7 +72,7 @@ ggsave("output/figures/07_just_nigeria_map.png",
 battles_in_nigeria <- ggplot() +
   geom_sf(data = nigeria_sf, fill = NA, color = "black", lwd = 1) +
   coord_sf() +
-  labs(title = "Map of Nigeria with Battles grouped by Top 3 Actors",
+  labs(title = "Map of Nigeria with Battles Grouped by Top 3 Actors",
        fill = "Elevation (m)",
        x = "Longitude",
        y = "Latitude") +

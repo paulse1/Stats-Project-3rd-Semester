@@ -147,7 +147,7 @@ fatalities_per_group_plot <- categorized_data |>
   mutate(cum_deaths = cumsum(deaths)) |> 
   ggplot(aes(x = event_date, y = cum_deaths, colour = actor_category)) +
   geom_line() +
-  labs(title = "Cumulative Deaths over Time per Group",
+  labs(title = "Associated Deaths over Time per Group",
        x = "Event Date",
        y = "Cumulative Deaths") +
   scale_color_manual(name = "Actor Category", values = palette_actors) +
@@ -214,7 +214,7 @@ facetted_bar_plot_violence_towards_civilians <- work_data_vtc |>
   ggplot(aes(x = sub_event_type)) +
   geom_bar() +
   facet_grid(rows = vars(actor_category), labeller = as_labeller(group_names)) +
-  labs(title = "Facetted Bar Plot of Type of Violence Towards Civilians by Actors",
+  labs(title = "Facetted Bar Plot of Type of Violence towards Civilians by Actors",
        y = "Count of Event",
        x = "Event Type") +
   scale_x_discrete(labels = c("Abduction",
