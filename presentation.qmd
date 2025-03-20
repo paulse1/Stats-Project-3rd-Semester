@@ -1,15 +1,14 @@
 ---
-title: "Armed Conflicts in Nigeria"
-subtitle: "Grundlegendes Praxisprojekt im dritten Semester"
+title: "Conflicts in Nigeria"
+subtitle: "Grundlegendes Praxisprojekt [w24/25]"
 author: "Gruppe 8: Danh Chau Ngo, Paul Seitz, Marc Landes, Yuxin Qiu, Shuangying Xu"
 institute: "Betreuung: Helen Alber (M.Sc.)"
 date: "2025-03-21"
 format: revealjs
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, cache=TRUE}
 source("source_all.R")
-
 ```
 
 ## Agenda
@@ -39,10 +38,10 @@ source("source_all.R")
 
 ::: incremental
 -   Nigeria has had a troubled past in the 20th century:
--   Formerly under british colonial rule
--   Self ruled since 1954 and independet since 1960
--   Heterogeneous resource and ethnical distribution throughout the country
--   Civil War from 1967 to 1970 as state of Biafra tried to gain independence
+-   Formerly under british colonial rule \[3\]
+-   Self ruled since 1954 and independet since 1960 \[3\]
+-   Heterogeneous resource and ethnical distribution throughout the country \[2\]
+-   Civil War from 1967 to 1970 as state of Biafra tried to gain independence \[3\]
 :::
 
 ## 2. Data Structure and Method (1/2)
@@ -72,78 +71,89 @@ source("source_all.R")
 
 ## 3.1. Getting to Know the Events (1/2)
 
-### Most General Question: What Types of Events are there ?
+Most General Question: What Types of Events are there ?
 
 ![](output/figures/02_pie_chart_event_types.png)
 
 ## 3.1. Getting to Know the Events (2/2)
 
-### Did the Types of Events Change over Time ?
+Did the Types of Events Change over Time ?
 
 ![](output/figures/03_lineplot_event_types.png)
 
 ## 3.2. Getting to Know the Actors (1/2)
 
-### How can we Group Actors and which Ones are Most Impactful ?
+How can we Group Actors and which Ones are Most Impactful ?
 
 ![](output/figures/04_fatalities_per_group_plot.png)
 
 ## 3.2. Getting to Know the Actors (2/2)
 
-### Which Actors are most Hurtful to Civilians ?
+Which Actors are most Hurtful to Civilians ?
 
 ![](output/figures/01_grouped_violence_towards_civilians_plot.png)
 
 ## 3.3. Association between Actors and Events (1/2)
 
-### Do the Actors Differ in their Means of Civilian Violence ?
+Do the Actors Differ in their Means of Civilian Violence ?
 
-![](output/figures/06_facetted_sub_event_towards_civilias.png)
+![](output/figures/06_facetted_sub_event_towards_civilians.png)
 
 ## 3.3. Association between Actors and Events (2/2)
 
-### Do the Actors Differ in their Means of Remote Violence Towards other Armed Groups?
+Do the Actors Differ in their Means of Remote Violence Towards other Armed Groups?
 
 ![](output/figures/05_facetted_remote_violence.png)
 
 ## 3.4. Further Connections (1/5)
 
-### Are there Geographic Patterns?: Battles
+Are there Geographic Patterns?: Battles
 
 ![](output/figures/08_nigeria_map_with_battles.png)
 
 ## 3.4. Further Connections (2/5)
 
-### Are there Geographic Patterns?: Riots and Protests
+Are there Geographic Patterns?: Riots and Protests
 
 ![](output/figures/09_map_with_protest_and_riots.png)
 
 ## 3.4. Further Connections (3/5)
 
-### How did Battles Develop over Time?
+How did Battles Develop over Time?
 
 ![](output/gif/02a_battles.gif)
 
 ## 3.4. Further Connections (4/5)
 
-### How did Protests and Riots Develop over Time?
+How did Protests and Riots Develop over Time?
 
 ![](output/gif/01a_protests.gif)
 
 ## 3.4. Further Connections (5/5)
 
-### Important Question: Can We Make out Adversaries from the Data?
+Important Question: Can We Make out Adversaries from the Data?
 
 ![](output/figures/10_network_graph.png)
 
 ## 4. Summary
 
+::: incremental
+-   Event types are heterogeneous
+-   A number of most impactful actors can be made out
+-   The actors differ in their means of violence
+-   There are geographic trends
+-   The conflict seems to increase with time
+-   Civilians are targeted and killed
+:::
 
+## 5. Sources {.smaller}
 
+\[1\]BBC News. 2020. “Oman’s Sultan Qaboos Dies Aged 79.” BBC News, January 11, 2020. https://www.bbc.com/news/world-africa-51094093.
 
+\[2\]TRT World. 2023. ”Has Colonisation Continued to Shape Nigeria’s Politics? ”YouTube video, 4 min 57 sec. Posted February 22, 2019. https://www.youtube.com/watch?v=LWaSgYUTC0k.
 
+\[3\]Wikipedia. 2024. Nigeria. Last modified Mar 16, 2025. https://en.wikipedia.org/wiki/Nigeria.
 
+\[4\]Simplemaps, aufgerufen am 20.03.2025 https://simplemaps.com/data/ng-cities
 
-
-
-
+\[5\]The Nigerian Upstream Petroleum Regulatory Commission, aufgerufen am 20.03.2025 https://www.nuprc.gov.ng/oil-production-status-report/
