@@ -21,4 +21,18 @@ library(tidygraph)
 library(ggraph)
 
 ##setting ggplot theme
-theme_set(theme_bw())
+custom_theme <- theme_bw() +
+  theme(
+    legend.text = element_text(size = 11),  
+    legend.title = element_text(size = 13),
+    axis.title = element_text(size = 13),
+    title = element_text(size = 14)
+  )
+  
+theme_set(custom_theme)
+
+#creating brewer palettes, set2 is colorblindsafe, as well as dark2
+
+palette_actors <- brewer.pal(n = 5, name = "Set2")
+
+palette_events <- brewer.pal(n = 6, name = "Dark2")
