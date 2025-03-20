@@ -1,0 +1,66 @@
+---
+title: "Executive Summary"
+subtitle: "Armed Conflicts in Nigeria - Grundlegendes Praxisprojekt [w24/25]"
+author: "Group 8: Danh Chau Ngo, Paul Seitz, Marc Landes, Yuxin Qiu, Shuangying Xu"
+date: "2025-03-21"
+format: pdf
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+## Introduction
+
+The goal of this course was for the students to descriptively analyse a data set.
+Our group in particular received a data set about armed conflicts in Nigeria.
+We were given two main questions.
+
+-   
+
+    1)  Is there an association between type of conflict and conflict groups?
+
+-   
+
+    2)  Is there a change in the type of conflict observable over time?
+
+Before we go on to trying to answer them, we will introduce Nigeria in a broader context.
+Nigeria is a country in central Africa with an approximate population of 230 million and an area of approximately 923.000 square kilometers.
+It has a troubled history.
+Having been a British colony, it gained its self rule in 1954 and its independence in 1960.
+The country is ethnically mixed.
+The ethnicity which make up the largest proportion of the populus are the Hausa-Fulani (29%), which are muslim and live mostly north of the rivers Niger and Benue.
+Second are the Yoruba (21 %) which live in the Southwest of the country and third are the Igbo (18%) which are christian and live in the Southeast.
+Wealth and resources are distributed heterogeneous.
+Notably there are oil fields in the delta of the river Niger, which in the past have also been of foreign interest.
+One of the core events in Nigerian history is the civil war from 1967 to 1970, in which a group of seperatists, mostly consisting of Igbos tried to gain their independence and form a state called Biafra but eventually failed.
+The result of the civil war was a high civilian death count due to undernourishment and a unified Nigeria, which continued to have inner struggles.
+To prevent false assumptions it is to be said that this conflict is not the sole cause for today's struggles but is an interesting piece of history.
+
+## Data Structure
+
+The Data is sourced from the Armed Conflict Location and Event Data Project.
+It consists of 70897 observations with 39813 unique IDs.
+There are 19 variables in the raw data.
+Each observation is an event in Nigeria, i.e. a battle, a protest, a strategic development, etc..
+There is a notes variable, which gives further context about the events.
+Dates range from 1997 to 2025.
+In some variables like actor or sub event type, there is vast variety, for example the actor column counts 1439 unique strings.
+The Data is structured in a way to enable network analysis.
+There are up to 2 actors for an event, which may represent opposing parties in a conflict.
+Interestingly, not every ID has two actors.
+For Example protests, riots or strategic developments can have only one actor.
+So the data includes network data, but is not purely network data.
+Also, edges are not directed.
+The largest challenges which arise from this type of structure are the following:
+
+-   
+
+    1)  Simplification: Variables had to be categorized to make visualisation meaningful, guidelines were taken from ACLED's guide, except when single values outnumbered categories (see Boko/Haram and ISWAP)
+
+-   
+
+    2)  Dealing with the undirected Network: Sadly, questions like "How often did Boko Haram use IEDs?" cannot be answered in this setting but you can answer questions like "How often was there an IED event which was done by or was directed at Boko Haram"
+
+## Results
+
+
