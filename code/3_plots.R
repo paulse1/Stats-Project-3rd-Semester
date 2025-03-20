@@ -163,12 +163,12 @@ ggsave("output/figures/04_fatalities_per_group_plot.png",
 
 ## changed group names to fit into facet labels
 
-group_names <- c("Identity militia" = "Identity Militia",
-                 "ISWAP and/or Boko Haram" = "IS/Boko Haram",
-                 "Political militia" = "Political Militia",
+group_names <- c("Identity militia" = "Identity M.",
+                 "ISWAP and/or Boko Haram" = "IS/Boko H.",
+                 "Political militia" = "Political M.",
                  "State forces" = "State Forces",
                  "Unidentified Armed Group" = "Unidentified",
-                 "Unidentified or small group" = "Unidentified/Small")
+                 "Unidentified or small group" = "Unid./Small")
 
 facetted_bar_plot_remote_violence <- categorized_data |> 
   filter(event_type %in% c("Explosions/Remote violence")) |>

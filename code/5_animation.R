@@ -24,6 +24,7 @@ protest_in_nigeria_animation <- ggplot() +
                                 "Protests"
                      )
   ) +
+  theme_bw() +
   transition_states(
     year_month,
     transition_length = 1,

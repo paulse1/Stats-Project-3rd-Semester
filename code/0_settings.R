@@ -29,7 +29,8 @@ custom_theme <- theme_bw() +
     axis.title = element_text(size = 16),
     title = element_text(size = 18),
     axis.text.x = element_text(size = 12),
-    axis.text.y = element_text(size = 12)
+    axis.text.y = element_text(size = 12),
+    strip.text = element_text(size = 12)
   )
   
 theme_set(custom_theme)

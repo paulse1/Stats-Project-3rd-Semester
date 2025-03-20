@@ -7,6 +7,6 @@ lapply(list.files("code",
 )
 
 quarto_render("presentation.qmd", output_format = "revealjs")
-quart0_render("summary.qmd", output_format = "pdf")
+quarto_render("summary.qmd", output_format = "pdf")
 
 cat("~ end of source_all.R ~")
