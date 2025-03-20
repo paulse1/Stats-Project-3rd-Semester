@@ -27,13 +27,15 @@ source("source_all.R")
     3.4. Further Connections
 
 4.  Summary
+
+5.  Sources
 :::
 
-## 1. Introduction: Nigeria
+## 1. Introduction: Nigeria (1/2)
 
 ![](output/figures/07_just_nigeria_map.png)
 
-## 1. Introduction: Nigeria
+## 1. Introduction: Nigeria (2/2)
 
 ::: incremental
 -   Nigeria has had a troubled past in the 20th century:
@@ -43,7 +45,7 @@ source("source_all.R")
 -   Civil War from 1967 to 1970 as state of Biafra tried to gain independence
 :::
 
-## 2. Data Structure and Method
+## 2. Data Structure and Method (1/2)
 
 ::: incremental
 -   Data is sourced from ACLED
@@ -54,7 +56,7 @@ source("source_all.R")
 -   **Main challenges in data analysis are simplification and dealing with undirectedness**
 :::
 
-## 2. Data Structure and Method
+## 2. Data Structure and Method (2/2)
 
 ::: incremental
 -   **Method**
@@ -67,8 +69,6 @@ source("source_all.R")
 -   Is there an association between type of conflict and conflict groups ?
 -   Is there a change in the type of conflict observable over time ?
 :::
-
-## 3. Plots and Data Analysis
 
 ## 3.1. Getting to Know the Events (1/2)
 
@@ -135,6 +135,8 @@ source("source_all.R")
 ### Important Question: Can We Make out Adversaries from the Data?
 
 ![](output/figures/10_network_graph.png)
+
+## 4. Summary
 
 
 
