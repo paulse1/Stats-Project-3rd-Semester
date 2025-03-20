@@ -19,14 +19,16 @@ library(gganimate)
 library(igraph)
 library(tidygraph)
 library(ggraph)
+library(quarto)
 
 ##setting ggplot theme
 custom_theme <- theme_bw() +
   theme(
-    legend.text = element_text(size = 11),  
-    legend.title = element_text(size = 13),
-    axis.title = element_text(size = 13),
-    title = element_text(size = 14)
+    legend.text = element_text(size = 14),  
+    legend.title = element_text(size = 16),
+    axis.title = element_text(size = 16),
+    title = element_text(size = 18),
+    axis.text.x = element_text(size = 12)
   )
   
 theme_set(custom_theme)

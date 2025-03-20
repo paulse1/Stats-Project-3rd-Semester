@@ -36,12 +36,15 @@ set.seed(1)
 p2 <- ggraph(g2, layout = "fr") +
   geom_edge_link(aes(width = total_fatalities), color = "black", alpha = 0.3) +
   geom_node_point(size = 8, color = "tomato") +
-  geom_node_text(aes(label = name), size = 4, repel = TRUE) +
+  geom_node_text(aes(label = name), size = 6, repel = TRUE) +
   scale_edge_width(range = c(0.2, 3), name = "Total Fatalities") +
-  labs(title = "Actor Category Network by Fatalities")
+  labs(title = "Actor Category Network by Fatalities") +
+  theme(
+    axis.text.x = element_text(size = 0)
+  )
 
 ggsave("output/figures/10_network_graph.png",
       p2,
-      width = 8,
+      width = 14,
       height = 6,
       units = "in")

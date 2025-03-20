@@ -63,8 +63,8 @@ just_map <- ggplot() +
 
 ggsave("output/figures/07_just_nigeria_map.png",
        just_map,
-       width = 8,
-       height = 6,
+       width = 12,
+       height = 7,
        units = "in")
 
 ## Plotting Battles colored by Actors
@@ -89,8 +89,8 @@ battles_in_nigeria <- ggplot() +
 
 ggsave("output/figures/08_nigeria_map_with_battles.png",
        battles_in_nigeria,
-       width = 8,
-       height = 6,
+       width = 12,
+       height = 7,
        units = "in")
 
 ## Plotting Protest in Nigeria
@@ -120,6 +120,6 @@ protest_in_nigeria <- ggplot() +
 
 ggsave("output/figures/09_map_with_protest_and_riots.png",
        protest_in_nigeria,
-       width = 8,
-       height = 6,
+       width = 12,
+       height = 7,
        units = "in")

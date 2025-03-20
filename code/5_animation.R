@@ -24,6 +24,7 @@ protest_in_nigeria_animation <- ggplot() +
                                 "Protests"
                      )
   ) +
+  theme_bw() +
   transition_states(
     year_month,
     transition_length = 1,
@@ -63,6 +64,7 @@ top_3_battles_animation <- ggplot() +
                                 "State forces",
                                 "Unidentified Armed Group")
   ) +
+  theme_bw() +
   transition_states(
     year_month,
     transition_length = 1,

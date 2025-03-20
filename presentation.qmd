@@ -5,11 +5,10 @@ author: "Gruppe 8: Danh Chau Ngo, Paul Seitz, Marc Landes, Yuxin Qiu, Shuangying
 institute: "Betreuung: Helen Alber (M.Sc.)"
 date: "2025-03-21"
 format: revealjs
+include-in-header: |
+  <link rel="preload" href="output/gif/01a_protests.gif" as="image">
+  <link rel="preload" href="output/gif/02a_battles.gif" as="image">
 ---
-
-```{r setup, include=FALSE, cache=TRUE}
-source("source_all.R")
-```
 
 ## Agenda
 
@@ -150,7 +149,7 @@ Important Question: Can We Make out Adversaries from the Data?
 
 \[1\]BBC News. 2020. “Oman’s Sultan Qaboos Dies Aged 79.” BBC News, January 11, 2020. https://www.bbc.com/news/world-africa-51094093.
 
-\[2\]TRT World. 2023. ”Has Colonisation Continued to Shape Nigeria’s Politics? ”YouTube video, 4 min 57 sec. Posted February 22, 2019. https://www.youtube.com/watch?v=LWaSgYUTC0k.
+\[2\]TRT World. 2023. ”Has Colonisation Continued to Shape Nigeria’s Politics?”YouTube video, 4 min 57 sec. Posted February 22, 2019. https://www.youtube.com/watch?v=LWaSgYUTC0k.
 
 \[3\]Wikipedia. 2024. Nigeria. Last modified Mar 16, 2025. https://en.wikipedia.org/wiki/Nigeria.
 

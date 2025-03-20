@@ -74,7 +74,7 @@ vtc_plot <- work_data_vtc |>
 
 ggsave("output/figures/01_grouped_violence_towards_civilians_plot.png",
        vtc_plot,
-       width = 8,
+       width = 14,
        height = 6,
        units = "in")
 
@@ -135,7 +135,7 @@ event_type_year_plot <- work_data_events |>
 
 ggsave("output/figures/03_lineplot_event_types.png",
        event_type_year_plot,
-       width = 8,
+       width = 14,
        height = 6,
        units = "in")
 
@@ -155,7 +155,7 @@ fatalities_per_group_plot <- categorized_data |>
 
 ggsave("output/figures/04_fatalities_per_group_plot.png",
        fatalities_per_group_plot,
-       width = 8,
+       width = 14,
        height = 6,
        units = "in")
 
@@ -186,14 +186,11 @@ facetted_bar_plot_remote_violence <- categorized_data |>
                    ) +
   labs(title = "Bar Plot of Counts of Remote Violence Associated with Actors",
        y = "Count of Event",
-       x = "Event Type",
-       caption = "Note: Due to the structure of the data, it is not possible to
-       determine who the perpetrator is in these cases. So having used one type
-       of violence and having received it are both counted in this plot!")
+       x = "Event Type")
 
 ggsave("output/figures/05_facetted_remote_violence.png",
        facetted_bar_plot_remote_violence,
-       width = 8,
+       width = 14,
        height = 6,
        units = "in")
 
@@ -226,6 +223,6 @@ facetted_bar_plot_violence_towards_civilians <- work_data_vtc |>
 
 ggsave("output/figures/06_facetted_sub_event_towards_civilians.png",
        facetted_bar_plot_violence_towards_civilians,
-       width = 8,
+       width = 14,
        height = 6,
        units = "in")
