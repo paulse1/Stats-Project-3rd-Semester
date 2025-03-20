@@ -4,6 +4,8 @@ cat("~ sourcing 5_animation.R ~")
 
 animation_protest_data <- year_month_function(protest_data)
 
+saveRDS(animation_protest_data, "data/intermediate/animation_protest_data.RDS")
+
 protest_in_nigeria_animation <- ggplot() +
   geom_sf(data = nigeria_sf, fill = NA, color = "black", lwd = 1) +
   coord_sf() +
@@ -14,13 +16,10 @@ protest_in_nigeria_animation <- ggplot() +
        x = "Longitude",
        y = "Latitude") +
   scale_color_manual(name = "Cities, Protests and Riots",
-                     values = c("Oil Fields" = "blue",
-                                "Cities" = "black",
-                                "Riots" = palette[[1]],
-                                "Protests" = palette[[2]]
+                     values = c("Cities" = "black",
+                                palette_events
                      ),
                      breaks = c("Cities",
-                                "Oil Fields",
                                 "Riots",
                                 "Protests"
                      )
@@ -43,6 +42,8 @@ anim_save("output/gif/01a_protests.gif", animation = anim_protests)
 
 animation_top3_plot_data <- year_month_function(work_data_map)
 
+saveRDS(animation_top3_plot_data, "data/intermediate/animation_top3_plot_data.RDS")
+
 top_3_battles_animation <- ggplot() +
   geom_sf(data = nigeria_sf, fill = NA, color = "black", lwd = 1) +
   coord_sf() +
@@ -53,15 +54,9 @@ top_3_battles_animation <- ggplot() +
   geom_jitter(data = animation_top3_plot_data, aes(x = longitude, y = latitude, color = actor_category), size = 2, alpha = 1) +
   geom_point(data = top10_cities, aes(x = lng, y = lat, color = "Cities"), size = 3) +
   scale_color_manual(name = "Cities and Battles",
-                     values = c("Oil Fields" = "blue",
-                                "Cities" = "black",
-                                "Identity militia" = palette[[1]],
-                                "ISWAP and/or Boko Haram" = palette[[2]],
-                                "Political militia" = palette[[5]],
-                                "State forces" = palette[[3]],
-                                "Unidentified Armed Group" = palette[[4]]),
+                     values = c("Cities" = "black",
+                                palette_actors),
                      breaks = c("Cities",
-                                "Oil Fields",
                                 "Identity militia",
                                 "ISWAP and/or Boko Haram",
                                 "Political militia",
