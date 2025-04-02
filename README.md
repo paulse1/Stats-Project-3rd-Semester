@@ -13,6 +13,10 @@ For further information keep reading.
 Our project uses a lot of packages since we incorporated both map plotting and animation.
 To ensure all packages are installed, source package_installer.R.
 To then create both the summary and presentation, source source_all.R.
+Be sure not to have summary.pdf opened in another program (like adobe acrobat)
+before sourcing source_all.R, because it will abort right at the end because the computer 
+does not change files when they are opened elsewhere and sourcing source_all.R takes 
+approx. 2 minutes.
 package_installer.R is deliberately not included in source_all.R, to not install packages
 on the users computer unasked.
 
