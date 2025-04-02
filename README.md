@@ -33,7 +33,7 @@ are being stored.
 
 ### output
 
-Includes /figures for static plots and /gif for animated plots
+Includes /figures for static plots and /gif for animated plots.
 
 ### Other files
 
