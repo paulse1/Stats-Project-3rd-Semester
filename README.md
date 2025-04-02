@@ -1,6 +1,6 @@
 # Stats-Project-3rd-Semester: Armed Conflicts in Nigeria
 
-**Author: ** Danh Chau Ngo, Paul Seitz, Marc Landes, Yuxin Qiu, Shuangying Xu
+Authors: Danh Chau Ngo, Paul Seitz, Marc Landes, Yuxin Qiu, Shuangying Xu
 
 ## General Information
 
