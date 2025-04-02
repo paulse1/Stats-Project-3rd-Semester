@@ -161,7 +161,7 @@ ggsave("output/figures/04_fatalities_per_group_plot.png",
 
 ## Facetted Barplot Actors/Event Type
 
-## changed group names to fit into facet labels
+## changed/shortened group names to fit into facet labels
 
 group_names <- c("Identity militia" = "Identity M.",
                  "ISWAP and/or Boko Haram" = "IS/Boko H.",
@@ -170,20 +170,24 @@ group_names <- c("Identity militia" = "Identity M.",
                  "Unidentified Armed Group" = "Unidentified",
                  "Unidentified or small group" = "Unid./Small")
 
+sub_event_names <- c("Air/drone strike" = "Airstrike",
+                     "Remote explosive/landmine/IED" = "IED",
+                     "Shelling/artillery/missile attack" = "Artillery",
+                     "Suicide bomb" = "Suicide B.",
+                     "Abduction/forced disappearance" = "Abduction",
+                     "Attack" = "Attack",
+                     "Sexual violence" = "Sex. Viol.",
+                     "Mob violence" = "Mob. Viol.")
+
 facetted_bar_plot_remote_violence <- categorized_data |> 
   filter(event_type %in% c("Explosions/Remote violence")) |>
   group_by(sub_event_type, actor_category) |>
   filter(n() > 20) |> 
   ungroup() |> 
   filter(actor_category %in% main_actors) |> 
-  ggplot(aes(x = sub_event_type)) +
+  ggplot(aes(x = actor_category)) +
   geom_bar() +
-  facet_grid(rows = vars(actor_category), labeller = as_labeller(group_names)) +
-  scale_x_discrete(labels = c("Air/Drone Strike",
-                              "IED/Landmine",
-                              "Artillery/Missile",
-                              "Suicide Bomb")
-                   ) +
+  facet_grid(rows = vars(sub_event_type), labeller = as_labeller(sub_event_names)) +
   labs(title = "Bar Plot of Counts of Remote Violence Associated with Actors",
        y = "Count of Event",
        x = "Event Type")
@@ -208,18 +212,12 @@ facetted_bar_plot_violence_towards_civilians <- work_data_vtc |>
   group_by(sub_event_type, actor_category) |>
   filter(n() > 25) |> 
   ungroup() |>
-  ggplot(aes(x = sub_event_type)) +
+  ggplot(aes(x = actor_category)) +
   geom_bar() +
-  facet_grid(rows = vars(actor_category), labeller = as_labeller(group_names)) +
+  facet_grid(rows = vars(sub_event_type), labeller = as_labeller(sub_event_names)) +
   labs(title = "Facetted Bar Plot of Type of Violence towards Civilians by Actors",
        y = "Count of Event",
-       x = "Event Type") +
-  scale_x_discrete(labels = c("Abduction",
-                              "Attack",
-                              "Mob Violence",
-                              "IED/Landmine",
-                              "Sexual Violence",
-                              "Suicide Bomb"))
+       x = "Event Type")
 
 ggsave("output/figures/06_facetted_sub_event_towards_civilians.png",
        facetted_bar_plot_violence_towards_civilians,

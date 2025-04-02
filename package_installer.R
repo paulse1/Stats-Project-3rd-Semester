@@ -1,5 +1,6 @@
 # We did not know if people were comfortable installing packages
-# without checking which ones they were, so it is excluded from the source_all
+# without checking which ones they were, so it is excluded from the source_all.R
+# Source this file to install required packages
 
 # Package names
 packages <- c("tidyverse", "lubridate", "checkmate", "terra", "sf", "elevatr", "stars", "rnaturalearth",
