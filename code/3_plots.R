@@ -48,7 +48,6 @@ work_data_vtc <- wide_data_categorized |>
   filter(civilian_targeting == TRUE, actor1 == "Civilians" | actor2 == "Civilians") |> 
   filter(!is.na(actor1) & !is.na(actor2))
 
-saveRDS(work_data_vtc, "data/intermediate/work_data_vtc.RDS")
 
 ## Use main_actors and work_data_vtc to determine Brutality towards Civilians
 
@@ -118,8 +117,6 @@ ggsave("output/figures/02_pie_chart_event_types.png",
 work_data_events <- wide_data_categorized |>
   year_function() |> 
   filter(year != 2025)
-
-saveRDS(work_data_events, "data/intermediate/work_data_events.RDS")
 
 event_type_year_plot <- work_data_events |> 
   group_by(event_type, year) |> 

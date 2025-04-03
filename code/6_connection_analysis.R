@@ -5,8 +5,6 @@ cat("~ sourcing 6_connection_analysis.R ~")
 conflicts <- get_actor_cate2(wide_data_categorized) |> 
   filter(!is.na(actor1), !is.na(actor2))
 
-saveRDS(conflicts, "data/intermediate/conflict_for_network.RDS")
-
 
 ### Plot by category
 
